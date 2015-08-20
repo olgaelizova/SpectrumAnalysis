@@ -433,7 +433,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 			sp[i][j] = log(sp[i][j]);
 			//printf(" %.4f ",sp[i][j]);  //++
 		}
-		//printf("\n");
+		//printf("\n"); 
 	}
 
 	//printf("Nfrm = %d\t Nfrb = %d\n",Nfrm, Nfrb); // nachalnyi variant po speval_eq Nfrm=114,Nfrb=30
