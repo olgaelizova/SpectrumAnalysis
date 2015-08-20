@@ -199,7 +199,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	int bufsize = L + num_zero;
 	double* buf = new double[bufsize];
 	//buf = zeros_for_buffer(buffer, num_zero, L); // myfunction
-	buf = zeros_for_buffer(buffer, NFFT - Lfrm, NFFT); // (lens)3
+	buf = zeros_for_buffer(buffer, NFFT - Lfrm, Lfrm); // (lens)3
 
 	///zapis v fail znachenyi zeros_for_buffer
 	///
@@ -364,7 +364,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 			xfrm[i] = xfrm[i] * win[i]; //++
 			//fprintf(f,"%.4f\n",xfrm[i]);  //++ po 499 znach 114 raz
 			
-			if (xfrm[i] > -1e10)
+			if (i >= 858)
 			{
 				bool stop = true;
 			}
