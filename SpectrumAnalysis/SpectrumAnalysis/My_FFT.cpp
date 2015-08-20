@@ -40,7 +40,7 @@ double* FFTAnalysis(double *AVal, double *FTvl, int Nvl, int Nft)
 	}
 
 	Mmax = 2;
-	while (n > Mmax) {
+	while (n > Mmax) {  // very suspicious !!!
 		Theta = -TwoPi / Mmax; Wpi = sin(Theta);
 		Wtmp = sin(Theta / 2); Wpr = Wtmp * Wtmp * 2;
 		Istp = Mmax * 2; Wr = 1; Wi = 0; m = 1;
