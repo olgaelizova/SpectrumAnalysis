@@ -7,7 +7,7 @@
 //#include "zapis_etalona.cpp"
 
 #define _CRT_SECURE_NO_WARNINGS
-
+//my test
 using namespace std;
 
 // types for convert WinVS format in typical unix standa
@@ -459,15 +459,15 @@ double* matrINvect(double** matr, int N, int M)
 {
 	double* vec = new double[N*M];
 
-	for (int i = 0; i< N; i++)
+	for (int i = 0; i< N; i++) 
 	{
-		for (int j = 0; j<M; j++)
+		for (int j = 0; j<M; j++) 
 		{
 			vec[i*M + j] = matr[i][j];
 
-			//printf("%d\t%.4f\n",i*M+j, vec[i*M+j]);
+			printf("%d\t%.4f\n",i*M+j, vec[i*M+j]);
 		}
-		//printf("\n");
+		printf("\n");
 	}
 
 	return vec;
@@ -650,7 +650,7 @@ double** obr_matr(double **A, int N) // proverit' pravilnost
 	for (int j = 0; j < N; j++)
 	{
 		A[i][j] = E[i][j];
-		//cout << A[i][j] <<endl;
+		cout << A[i][j] <<endl;
 	}
 
 	for (int i = 0; i < N; i++)
@@ -928,6 +928,7 @@ int main(void)
 	int Nfrm = 17;
 	//////////////////////////////
 	double **spectr;
+	// posmotret speval - est INF v stolbcax
 	spectr = speval_eq(data_chunk, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	//zapis' etalonov iz txt faila
