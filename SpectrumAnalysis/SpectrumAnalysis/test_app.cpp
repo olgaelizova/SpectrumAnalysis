@@ -393,9 +393,9 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 			for (int l = 0; l<Nfrb; l++)  //Nfrb
 			{
 				int j = 0;
-				if (l != 0 || l != 15)  // stranno s 15, tk tam v matlabe 8 znach a ne 9
+				if (l != 0 && l != 15)  // stranno s 15, tk tam v matlabe 8 znach a ne 9
 				{
-					for (int s = ibeg[l] - 2; s<iend[l]; s++)
+					for (int s = ibeg[l] - 1; s<iend[l]; s++) // s < -1 ????????
 					{
 						val = X[s];
 						X_vrem[j] = val;
@@ -956,7 +956,7 @@ int main(void)
 	///// neverno tak kak dolgen bit k2 max dlya etalona so slovom
 
 	cout << "pilotag\n" << endl;
-	koef_of_regr_korr(lin_spectr, etalon.pilotag, 1, col_vect, len_etalona);
+	koef_of_regr_korr(lin_spectr, etalon.pilotag, 1, col_vect, len_etalona); // (lens)5 to fix
 
 	//cout << "mashtab\n" << endl;
 	//koef_of_regr_korr (lin_spectr, etalon.mashtab, 1, col_vect, len_etalona);
