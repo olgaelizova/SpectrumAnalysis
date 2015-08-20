@@ -210,6 +210,8 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	//delenie na chastotnye polosy
 	int* iend = new int[Nfrb];
 	int* ibeg = new int[Nfrb];
+	double* freq = new double[Nfrb];
+
 	if (strcmp(type, "hz") == 0)
 	{
 		double Fstep = (double)(Fmax - Fmin) / (double)Nfrb;
@@ -225,7 +227,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 			}
 		}
 
-		double* freq = new double[Nfrb];
+
 		for (int i = 0; i<Nfrb; i++)
 		{
 			if (i == 0)
@@ -258,7 +260,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 			iend[i] = floor(NFFT*Fbins[i + 1] * 10000. / Fs) + 1;
 		}
 
-		delete[] freq;
+
 
 	}
 	//////////////////
@@ -298,6 +300,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 		{
 			freqInt[i] = Fbins[i];
 		}
+
 	}
 	//////////////////
 	int end_beg_frm = (Nfrm - 1)*h + 1;
@@ -439,6 +442,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	delete[]iend;
 	delete[]buf;
 	delete[]win;
+	delete[] freq;
 	//////
 	return sp;
 }
