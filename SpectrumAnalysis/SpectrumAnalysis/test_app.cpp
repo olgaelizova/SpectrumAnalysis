@@ -176,7 +176,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	//printf("Lfrm %d\n",Lfrm);//++
 	int noverlap = fix(overlap*Lfrm); //myfunction
 	//printf("noverlap %d\n",noverlap);//++
-	int h = Lfrm - noverlap;
+	int h = Lfrm - noverlap; //
 	//printf("h %d\n",h);//++
 
 	int NFFT = pow(2, nextpow2(Lfrm));  //myfunction
