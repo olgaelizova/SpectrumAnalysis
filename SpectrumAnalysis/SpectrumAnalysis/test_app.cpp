@@ -373,7 +373,9 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 		}
 		//fprintf(f,"\n");
 
-		X = FFTAnalysis(xfrm, X, NFFT, NFFT);  // problem solved
+		xfrm = zeros_for_buffer(xfrm, NFFT - Lfrm, Lfrm);
+
+		X = FFTAnalysis(xfrm, X, NFFT, NFFT);  // problem solved (lens)4 problem solved
 
 		for (int i = 0; i<NFFT; i++)
 		{
