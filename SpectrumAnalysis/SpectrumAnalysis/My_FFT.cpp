@@ -22,7 +22,7 @@ double* FFTAnalysis(double *AVal, double *FTvl, int Nvl, int Nft)
 		Tmvl[i + 1] = AVal[i / 2];
 	}
 
-	i = 1; j = 1;
+	i = 1; j = 1; /// WAY TOO SUSpicious (lens)2
 	while (i < n) {
 		if (j > i) {
 			Tmpr = Tmvl[i]; 
@@ -55,8 +55,10 @@ double* FFTAnalysis(double *AVal, double *FTvl, int Nvl, int Nft)
 				Tmpr = Wr * Tmvl[j] - Wi * Tmvl[j - 1];
 				Tmpi = Wi * Tmvl[j] + Wr * Tmvl[j - 1];
 
-				Tmvl[j] = Tmvl[i] - Tmpr; Tmvl[j - 1] = Tmvl[i - 1] - Tmpi;
-				Tmvl[i] = Tmvl[i] + Tmpr; Tmvl[i - 1] = Tmvl[i - 1] + Tmpi;
+				Tmvl[j] = Tmvl[i] - Tmpr; 
+				Tmvl[j - 1] = Tmvl[i - 1] - Tmpi;
+				Tmvl[i] = Tmvl[i] + Tmpr; 
+				Tmvl[i - 1] = Tmvl[i - 1] + Tmpi;
 				i = i + Istp;
 			}
 		}
