@@ -261,7 +261,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	}
 	//////////////////
 	int* ind = new int[Nfrb];
-	int* freq = new int[Nfrb - 2];
+	int* freq = new int[Nfrb - 2]; // freq cganged to freqInt
 
 	if (strcmp(type, "mel") == 0)  // utochnit pravilnost vichislenia i ciklov !!!!!
 	{
@@ -294,7 +294,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 
 		for (int i = 2; i<Nfrb - 2; i++)
 		{
-			freq[i] = Fbins[i];
+			freqInt[i] = Fbins[i];
 		}
 	}
 	//////////////////
