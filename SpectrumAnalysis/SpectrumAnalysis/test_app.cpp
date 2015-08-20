@@ -258,10 +258,12 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 			iend[i] = floor(NFFT*Fbins[i + 1] * 10000. / Fs) + 1;
 		}
 
+		delete[] freq;
+
 	}
 	//////////////////
 	int* ind = new int[Nfrb];
-	int* freq = new int[Nfrb - 2]; // freq cganged to freqInt
+	int* freqInt = new int[Nfrb - 2]; // freq cganged to freqInt
 
 	if (strcmp(type, "mel") == 0)  // utochnit pravilnost vichislenia i ciklov !!!!!
 	{
@@ -431,7 +433,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	delete[]xfrm;
 	delete[]end_frm;
 	delete[]beg_frm;
-	delete[]freq;
+	delete[]freqInt;
 	delete[]ind;
 	delete[]ibeg;
 	delete[]iend;
