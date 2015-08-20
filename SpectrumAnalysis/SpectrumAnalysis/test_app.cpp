@@ -5,18 +5,18 @@
 #include <math.h>
 //#include "My_FFT.cpp"
 //#include "zapis_etalona.cpp"
-#include "My_FFT.h"
-#include "zapis_etalona.h"
-
-#include <iostream>
-#include <fstream>
-#include <string>
 
 #define _CRT_SECURE_NO_WARNINGS
 
 using namespace std;
 
-// types for convert WinVS format in typical unix standart
+// types for convert WinVS format in typical unix standa
+#include "My_FFT.h"
+#include "zapis_etalona.h"
+
+#include <iostream>
+#include <fstream>
+#include <string>rt
 typedef unsigned short WORD;
 typedef unsigned int DWORD;
 typedef short INT16;
@@ -63,9 +63,9 @@ double fix(double Number) // function for get num without .xxx part
 	Number = fabs(Number);
 
 	if (Number > floor(Number) + 0.5)
-		Number = ceil(Number);
+		Number = floor(Number); //ceil
 	else
-		Number = floor(Number);
+		Number = ceil(Number); //floor
 
 	return Negative ? Number * (-1) : Number;
 }
@@ -168,6 +168,7 @@ double sum(double* mas, int size)
 double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, char* window, char* type) // function for spectral analys
 {
 	int L = chunk.size * 8 / header.wBitsPerSample;  // razmer massiva
+	//cout << L << endl;
 	double lfrm = double(L) / double(Nfrm*(1 - overlap) + overlap);
 	int Lfrm = fix(lfrm);  //myfunction
 	//printf("Lfrm %d\n",Lfrm);//++
@@ -524,10 +525,19 @@ double** transpONmatr(double** transp_matr, double** matr, int N, int M) // N=le
 		mul[i] = new double[size];
 		for (int j = 0; j<size; j++)
 		{
-			for (int k = 0; k<l; k++)
+			mul[i][j] = 0;
+			for (int k = 0; k < l; k++)
+			{
 				mul[i][j] += transp_matr[i][k] * matr[k][j]; // some strange :(
+				//cout << transp_matr[i][k] << endl;
+				//if ((k % 100) == 0)
+				//	bool stop = true;
+				//cout << matr[k][j] << endl;
+				//printf("\n transp");
+				//cout << transp_matr[i][k] << endl;
+			}
 
-			//cout << mul[i][j]<<endl;
+		//	cout << mul[i][j]<<endl;
 		}
 	}
 
@@ -888,7 +898,7 @@ int main(void)
 	//spectral analysis
 
 	int Fs = 22050;
-	double overlap = 0.75;
+	double overlap = 0.0;
 	double NFFT = 512.0;
 	double nfrm = samples_count / (NFFT*(1 - overlap));
 	//int Nfrb = 30;
