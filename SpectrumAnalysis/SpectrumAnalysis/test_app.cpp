@@ -167,6 +167,8 @@ double sum(double* mas, int size)
 
 double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, char* window, char* type) // function for spectral analys
 {
+
+	// TODO: THIS IS THE START (lens)
 	int L = chunk.size * 8 / header.wBitsPerSample;  // razmer massiva
 	//cout << L << endl;
 	double lfrm = double(L) / double(Nfrm*(1 - overlap) + overlap);
