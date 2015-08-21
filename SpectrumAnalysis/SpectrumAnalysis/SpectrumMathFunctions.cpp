@@ -2,29 +2,14 @@
 #include "SpectrumMathFunctions.h"
 #include "My_FFT.h"
 #include "FileUtils.h"
+#include "SpectrumMathSupport.h"
 
 extern etalon_			etalon;
 extern wav_header_t		header;
 extern chunk_t			chunk;
 
 
-double* zeros_for_buffer(double* buffer, int num_zero, int L)  //dobavlenie nulei v konec buffera
-{
-	double* buf = new double[L + num_zero]; //
 
-	//for (int i = 0; i<L; i++) // end of array has been violated!
-	for (int i = 0; i<L + num_zero; i++) // end of array has been violated!
-	{
-		buf[i] = buffer[i];
-	}
-
-	for (int i = 0; i<num_zero; i++)
-	{
-		buf[L + i] = 0;
-	}
-
-	return buf;
-}
 
 
 double fix(double Number) // function for get num without .xxx part
@@ -85,26 +70,6 @@ double* feval(int NFFT, char* window, int Lfrm)  // function for evaluation wind
 	return win;
 }
 
-double** zeros(int m, int n)  //formirovanie dvumernogo massiva MxN iz nulei
-{
-	double** mas = new double*[m];
-
-	for (int i = 0; i<m; i++)
-	{
-		mas[i] = new double[n];
-	}
-
-	for (int i = 0; i<m; i++)
-	{
-		for (int j = 0; j<n; j++)
-		{
-			mas[i][j] = (double)0;
-		}
-	}
-
-	return mas;
-}
-
 double sum(double* mas, int size)
 {
 	double sum = 0.0;
@@ -148,11 +113,11 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	int num_zero = noverlap + Nfrm*h - L;
 	//int np = nextpow2(num_zero+L);
 	//printf("nextpow2(zeros) %d\n",np); //++
-	int bufsize = L + num_zero;
+	int bufsize = L;// + num_zero;
 	double* buf = new double[bufsize];
 	//buf = zeros_for_buffer(buffer, num_zero, L); // myfunction
-	buf = zeros_for_buffer(buffer, num_zero, L); // (lens)3
-
+	//buf = zeros_for_buffer(buffer, num_zero, L); // (lens)3
+	memcpy(buf, buffer, sizeof(double) * L);
 	///zapis v fail znachenyi zeros_for_buffer
 	///
 
@@ -202,7 +167,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 			}
 			else
 			{
-				ibeg[i] = ceil(NFFT*Fbins[i] * 10000. / Fs) + 2; //why not floor? magic:(
+				ibeg[i] = ceil(NFFT*Fbins[i] * 10000. / Fs) + 1; // 1 ( !!!!! ) (lens)(MISTAKE FOUND) //why not floor? magic:(
 				//ibeg[i] = floor(NFFT*Fbins[i]*10000./Fs)+1;
 			}
 		}
@@ -257,12 +222,14 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	}
 	//////////////////
 	int end_beg_frm = (Nfrm - 1)*h + 1;
+
 	int* beg_frm = new int[Nfrm];
+
 	for (int i = 0; i<Nfrm; i++)
 	{
 		if (i == 0)
 		{
-			beg_frm[i] = 1;
+			beg_frm[i] = 0;
 		}
 		else
 		{
@@ -306,7 +273,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 		//printf("%d\n\n",k);  // ot 0 do 113 ++
 		//printf("%d\t%d\n",beg_frm[k],end_frm[k]);
 		int i = 0;
-		for (int j = beg_frm[k] - 1; j <= end_frm[k] - 1; j++)
+		for (int j = beg_frm[k]; j <= end_frm[k]; j++)
 		{
 			val = buf[j];  // viborka ++ po 499 znachenyi
 			//fprintf(f,"%.4f\n",val);
@@ -316,10 +283,6 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 			xfrm[i] = xfrm[i] * win[i]; //++
 			//fprintf(f,"%.4f\n",xfrm[i]);  //++ po 499 znach 114 raz
 
-			if (i >= 858)
-			{
-				bool stop = true;
-			}
 
 			i++;
 		}
@@ -517,7 +480,6 @@ double** transpONmatr(double** transp_matr, double** matr, int N, int M) // N=le
 
 	return mul;
 }
-
 
 double* matrONvec(double** matr, double* vec, int N, int M)
 {

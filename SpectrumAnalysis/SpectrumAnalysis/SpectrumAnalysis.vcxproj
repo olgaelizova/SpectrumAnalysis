@@ -120,6 +120,7 @@
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="My_FFT.cpp" />
     <ClCompile Include="SpectrumMathFunctions.cpp" />
+    <ClCompile Include="SpectrumMathSupport.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="test_app.cpp" />
     <ClCompile Include="zapis_etalona.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="My_FFT.h" />
     <ClInclude Include="SpectrumMathFunctions.h" />
+    <ClInclude Include="SpectrumMathSupport.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="zapis_etalona.h" />

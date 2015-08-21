@@ -35,8 +35,6 @@ struct etalon_
 	double* navigacia;
 };
 
-double* zeros_for_buffer(double* buffer, int num_zero, int L);  //dobavlenie nulei v konec buffera
-
 double fix(double Number); // function for get num without .xxx part
 
 double hz2mel(double Fo);  // perevod hz v mel
@@ -46,8 +44,6 @@ double mel2hz(double Fo);  // perevod mel v hz
 int nextpow2(int b);  // poluchenie pokazatelya stepeni
 
 double* feval(int NFFT, char* window, int Lfrm);  // function for evaluation window parameters
-
-double** zeros(int m, int n);  //formirovanie dvumernogo massiva MxN iz nulei
 
 double sum(double* mas, int size);
 
