@@ -432,7 +432,7 @@ double** matrONmatr(double** matr1/*kvadr*/, double** matr2/*pryamoug*/, int N/*
 		mul[i] = new double[N];
 		for (int j = 0; j<N; j++)//stolbcy
 		{
-			//mul[0][0] = matr1[0][0]*matr2[0][0] + matr1[0][1]*matr2[1][0];
+			mul[i][j] = 0;
 			for (int t = 0; t<2; t++)
 			{
 				mul[i][j] += matr1[i][t] * matr2[t][j];
@@ -502,6 +502,8 @@ double* matrONvec(double** matr, double* vec, int N, int M)
 
 	for (int i = 0; i<size_i; i++)
 	{
+		mul[i] = 0;
+
 		for (int j = 0; j<size_j; j++)
 		{
 			mul[i] += matr[i][j] * vec[j];
@@ -660,9 +662,7 @@ double* abs_vec(double* vec, int len)
 {
 	for (int i = 0; i<len; i++)
 	{
-		if (vec[i] > 0)
-			vec[i] = vec[i];
-		else
+		if (vec[i] < 0)
 			vec[i] = vec[i] * (-1.0);
 		//printf(" %.4f ",vec[i]); //++
 	}
@@ -762,7 +762,7 @@ int koef_of_regr_korr(double* buffer, double* etalon, int usenoise, int col, int
 	//delete[] proizv;
 	delete[] shum;
 	delete[] constanta;
-	delete[] subst;
+	//delete[] subst;
 
 	for (int i = 0; i<len; i++)
 		delete[] X[i];

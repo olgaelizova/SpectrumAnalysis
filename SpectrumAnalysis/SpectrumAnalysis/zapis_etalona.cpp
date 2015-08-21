@@ -69,6 +69,8 @@ double * readDoubles(char* name)
 
 	}
 
+	input.close();
+
 	return result;
 }
 
