@@ -199,7 +199,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	int bufsize = L + num_zero;
 	double* buf = new double[bufsize];
 	//buf = zeros_for_buffer(buffer, num_zero, L); // myfunction
-	buf = zeros_for_buffer(buffer, NFFT - Lfrm, Lfrm); // (lens)3
+	buf = zeros_for_buffer(buffer, num_zero, L); // (lens)3
 
 	///zapis v fail znachenyi zeros_for_buffer
 	///
@@ -453,6 +453,18 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	delete[] freq;
 	//////
 	return sp;
+
+	for (int a = 0; a < 17; a++)
+	{
+		printf("Row number: ");
+		printf("%d", a);
+
+		for (int b = 0; b < 35; b++)
+		{
+			printf("%f4,2", sp[a][b]);
+		}
+	}
+		
 }
 
 double* matrINvect(double** matr, int N, int M)
