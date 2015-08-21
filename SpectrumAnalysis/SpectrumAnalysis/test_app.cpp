@@ -16,7 +16,9 @@ using namespace std;
 
 #include <iostream>
 #include <fstream>
-#include <string>rt
+#include <string>
+#include "FileUtils.h"
+
 typedef unsigned short WORD;
 typedef unsigned int DWORD;
 typedef short INT16;
@@ -452,18 +454,12 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	delete[]win;
 	delete[] freq;
 	//////
+
+
+	FileUtils::SaveMatrixToFile("SpectrumData.txt", sp, Nfrm, Nfrb);
+
 	return sp;
 
-	for (int a = 0; a < 17; a++)
-	{
-		printf("Row number: ");
-		printf("%d", a);
-
-		for (int b = 0; b < 35; b++)
-		{
-			printf("%f4,2", sp[a][b]);
-		}
-	}
 		
 }
 
