@@ -26,6 +26,7 @@ wav_header_t	header;
 chunk_t			chunk;
 
 
+
 int main(void)
 {
 	FILE *f = 0;
@@ -110,9 +111,10 @@ int main(void)
 	char name2[20] = { "etalon_mashtab.txt" };
 	char name3[22] = { "etalon_navigacia.txt" };
 
-	etalon.pilotag = zapis_etalona(name1);
-	etalon.mashtab = zapis_etalona(name2);
-	etalon.navigacia = zapis_etalona(name3);
+	//etalon.pilotag = zapis_etalona(name1);		// gives mean value -3.1386171643444776
+	etalon.pilotag		= readDoubles(name1);		// gives mean value -3.1406766853184722
+	etalon.mashtab		= readDoubles(name2);
+	etalon.navigacia	= readDoubles(name3);
 	//////////////////////////////
 	//vityagivanie matrici spectralnogo analiza v vector
 
@@ -145,6 +147,10 @@ int main(void)
 	delete[]data_chunk;  // ochistka pamyaty
 	delete[]value;  // ochistka pamyaty
 	//////
+
+
+	_CrtDumpMemoryLeaks();
+
 	return 0;
 }
 /*

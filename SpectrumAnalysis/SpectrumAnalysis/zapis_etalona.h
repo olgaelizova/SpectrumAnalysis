@@ -6,3 +6,5 @@
 #include <math.h>
 
 double* zapis_etalona(char name[]);
+
+double * readDoubles(char* name);

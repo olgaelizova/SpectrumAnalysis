@@ -1,9 +1,78 @@
 #include "stdafx.h"
 #include "zapis_etalona.h"
+#include <vector>
 
 #define _CRT_SECURE_NO_WARNINGS
+#define DEFAULT_ETALON_PILOTAG_SIZE	595
 
 using namespace std;
+
+double * readDoubles(char* name)
+{
+	int pos = 0;
+	double * result = new double[DEFAULT_ETALON_PILOTAG_SIZE];
+
+	ifstream input(name, ios_base::in);
+	if (!input.is_open()) printf("Error input file\n");;
+
+	while (!input.eof())
+	{
+		result[pos] = 0;
+
+		string value;
+		input >> value;
+		double z = 0.0;
+
+		int		sign = 1;
+		bool	point = false;
+		int		decPosition = 0;
+
+		for (int a = 0; a < value.length(); a++) // find the point
+		{
+
+			if ( (value[a] == ',') || (value[a] == '.') )
+			{
+				point		= true;
+				decPosition = a;
+				break;
+			}
+		}
+
+		if (point)
+		for (int a = value.length() - 1; a > decPosition; a--) // calculate decimal part
+		{
+			if  ( (value[a] >= '0') && (value[a] <= '9') )
+			{
+				double digit = value[a] - '0';
+				result[pos] += (double) 1 / pow(10, ( a - decPosition ) ) * digit;
+			}
+		}
+
+		int decPower = 0;
+
+		for (int a = decPosition - 1; a >= 0; a--) // calculate natural part
+		{
+			if ((value[a] >= '0') && (value[a] <= '9'))
+			{
+				double digit = value[a] - '0';
+				result[pos] += pow(10, decPower) * digit;
+				decPower++;
+			}
+		}
+
+		if (value[0] == '-')
+			result[pos] *= -1;
+		else
+			bool stop = true;
+
+		pos++;
+
+	}
+
+	input.close();
+
+	return result;
+}
 
 double* zapis_etalona(char name[])
 {
