@@ -14,7 +14,7 @@ FileUtils::~FileUtils()
 void FileUtils::SaveMatrixToFile(char* f, double** m, int w, int h)
 {
 	FILE * file = 0;
-	const char * chars = new char[256];
+	const char * chars;
 	std::string str;
 
 	file = fopen(f, "wb");
@@ -45,8 +45,6 @@ void FileUtils::SaveMatrixToFile(char* f, double** m, int w, int h)
 			out << "\r\n";
 
 		}
-
-		delete[] chars;
 
 		fclose(file);
 		
