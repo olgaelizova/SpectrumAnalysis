@@ -4,7 +4,7 @@
 
 #include <math.h>
 //#include "My_FFT.cpp"
-//#include "zapis_etalona.cpp"
+// and I forked the project, where will it save ?
 
 #define _CRT_SECURE_NO_WARNINGS
 
