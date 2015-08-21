@@ -46,6 +46,8 @@ void FileUtils::SaveMatrixToFile(char* f, double** m, int w, int h)
 
 		}
 
+		delete[] chars;
+
 		fclose(file);
 		
 	}
