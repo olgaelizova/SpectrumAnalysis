@@ -379,12 +379,24 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 double* matrINvect(double** matr, int N, int M)
 {
 	double* vec = new double[N*M];
-
+	/*
 	for (int i = 0; i< N; i++)
 	{
 		for (int j = 0; j<M; j++)
 		{
 			vec[i*M + j] = matr[i][j];
+
+			//printf("%d\t%.4f\n",i*M+j, vec[i*M+j]);
+		}
+		//printf("\n");
+	}
+	*/
+
+	for (int i = 0; i< M; i++)
+	{
+		for (int j = 0; j<N; j++)
+		{
+			vec[i*N + j] = matr[j][i];
 
 			//printf("%d\t%.4f\n",i*M+j, vec[i*M+j]);
 		}
@@ -396,6 +408,8 @@ double* matrINvect(double** matr, int N, int M)
 
 double** transp_matr(double** matr, int N, int M)  // N=len, M=col
 {
+
+	
 	double** t_matr = new double*[M];
 
 	for (int i = 0; i<M; i++)
@@ -410,6 +424,24 @@ double** transp_matr(double** matr, int N, int M)  // N=len, M=col
 		}
 	}
 
+	
+
+	// change N and M
+	/*
+	double** t_matr = new double*[N];
+
+	for (int i = 0; i<N; i++)
+	{
+		t_matr[i] = new double[M];
+		for (int j = 0; j<M; j++)
+		{
+			//matr[i][j] += matr[j][i];
+			//matr[j][i] = matr[i][j] - matr[j][i];
+			//matr[i][j] -= matr[j][i];
+			t_matr[i][j] = matr[j][i];
+		}
+	}
+	*/
 	/*	for(int i=0; i<M; ++i)
 	{
 	for(int j=0; j<N; ++j)
@@ -425,6 +457,7 @@ double** transp_matr(double** matr, int N, int M)  // N=len, M=col
 
 double** matrONmatr(double** matr1/*kvadr*/, double** matr2/*pryamoug*/, int N/*len*/, int M/*col*/)
 {
+
 	double** mul = new double*[M];
 
 	for (int i = 0; i<M; i++)//stroki
@@ -438,10 +471,32 @@ double** matrONmatr(double** matr1/*kvadr*/, double** matr2/*pryamoug*/, int N/*
 				mul[i][j] += matr1[i][t] * matr2[t][j];
 			}
 
+			//std::cout << mul[i][j] << "\n";
+		}
+	//	std::cout << "\n\n";
+	}
+
+
+	/*
+	double** mul = new double*[N];
+
+	for (int i = 0; i<N; i++)//stroki
+	{
+		mul[i] = new double[M];
+		for (int j = 0; j<M; j++)//stolbcy
+		{
+			mul[i][j] = 0;
+			for (int t = 0; t<2; t++)
+			{
+				mul[i][j] += matr1[t][i] * matr2[j][t];
+			}
+
 			std::cout << mul[i][j] << "\n";
 		}
 		std::cout << "\n\n";
 	}
+
+	*/
 
 	return mul;
 }
@@ -465,7 +520,9 @@ double** transpONmatr(double** transp_matr, double** matr, int N, int M) // N=le
 			mul[i][j] = 0;
 			for (int k = 0; k < l; k++)
 			{
-				mul[i][j] += transp_matr[i][k] * matr[k][j]; // some strange :(
+				//mul[i][j] += transp_matr[i][k] * matr[k][j]; // some strange :(
+				mul[i][j] += transp_matr[i][k] * matr[k][j];
+
 				//cout << transp_matr[i][k] << endl;
 				//if ((k % 100) == 0)
 				//	bool stop = true;
@@ -729,7 +786,6 @@ int koef_of_regr_korr(double* buffer, double* etalon, int usenoise, int col, int
 	koef = matrONvec(quotient, buffer, len, col);
 
 	std::cout << koef[1] << std::endl;
-
 	/*double** matr1 = new double*[2]; // test
 	double** matr2 = new double*[2];
 

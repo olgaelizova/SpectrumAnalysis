@@ -131,14 +131,20 @@ int main(void)
 
 	///// neverno tak kak dolgen bit k2 max dlya etalona so slovom
 
+	int lDataOutput = 0;
+
 	cout << "pilotag\n" << endl;
 	koef_of_regr_korr(lin_spectr, etalon.pilotag, 1, col_vect, len_etalona); // (lens)5 to fix
 
-	//cout << "mashtab\n" << endl;
-	//koef_of_regr_korr (lin_spectr, etalon.mashtab, 1, col_vect, len_etalona);
+	lDataOutput++;
 
-	//cout << "navigacia\n" << endl;
-	//koef_of_regr_korr (lin_spectr, etalon.navigacia, 1, col_vect, len_etalona);
+	cout << "mashtab\n" << endl;
+	koef_of_regr_korr (lin_spectr, etalon.mashtab, 1, col_vect, len_etalona);
+
+	lDataOutput++;
+
+	cout << "navigacia\n" << endl;
+	koef_of_regr_korr (lin_spectr, etalon.navigacia, 1, col_vect, len_etalona);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	/// vivod v fail
