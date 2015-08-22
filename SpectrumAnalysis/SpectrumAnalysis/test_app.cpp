@@ -1,10 +1,14 @@
+/*
+lex_experiments_master
+*/
+
 #include "stdafx.h"
 #include <memory.h>  // analog mem.h in WinVS  // <memory.h> in unix
 #include <stdio.h>
 
 #include <math.h>
 //#include "My_FFT.cpp"
-// and I forked the project, where will it save ?
+// and I forked the project, where will it save ? 
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -30,8 +34,13 @@ chunk_t			chunk;
 int main(void)
 {
 	FILE *f = 0;
-
-	f = fopen("pilotag_wav.wav", "rb");
+	char* wavfile[3] = {"pilotag_wav.wav","mashtab_wav.wav","navigacia_wav.wav"};
+	//f = fopen("pilotag_wav.wav", "rb");
+	//f = fopen("navigacia_wav.wav", "rb");
+	for (int i = 0; i < 3; i++) // i=0
+	{
+		cout << "Wav-file is: " << wavfile[i] << endl << endl;
+		f = fopen(wavfile[i], "rb");
 
 	if (f == NULL)
 	{
@@ -83,6 +92,7 @@ int main(void)
 		//for 16 bits per sample only: delim na 0x8000 chto ravno 32768.0;
 		double x = (double)(INT16)value[i] / 32768.0;
 		data_chunk[i] = x;
+		//cout << data_chunk[i] << endl;
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,15 +141,23 @@ int main(void)
 
 	///// neverno tak kak dolgen bit k2 max dlya etalona so slovom
 
+	int lDataOutput = 0;
+	cout << "Etalon is: " << endl <<endl;
 	cout << "pilotag\n" << endl;
 	koef_of_regr_korr(lin_spectr, etalon.pilotag, 1, col_vect, len_etalona); // (lens)5 to fix
 
-	//cout << "mashtab\n" << endl;
-	//koef_of_regr_korr (lin_spectr, etalon.mashtab, 1, col_vect, len_etalona);
+	lDataOutput++;
+	cout << endl;
 
-	//cout << "navigacia\n" << endl;
-	//koef_of_regr_korr (lin_spectr, etalon.navigacia, 1, col_vect, len_etalona);
+	cout << "mashtab\n" << endl;
+	koef_of_regr_korr (lin_spectr, etalon.mashtab, 1, col_vect, len_etalona);
 
+	lDataOutput++;
+	cout << endl;
+
+	cout << "navigacia\n" << endl;
+	koef_of_regr_korr (lin_spectr, etalon.navigacia, 1, col_vect, len_etalona);
+	cout << endl << endl;
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	/// vivod v fail
 	///////
@@ -147,16 +165,9 @@ int main(void)
 	delete[]data_chunk;  // ochistka pamyaty
 	delete[]value;  // ochistka pamyaty
 	//////
-
+	}
 
 	_CrtDumpMemoryLeaks();
 
 	return 0;
 }
-/*
-
-int _tmain(int argc, _TCHAR* argv[])
-{
-	return 0;
-}
-*/
