@@ -20,7 +20,7 @@ double fix(double Number) // function for get num without .xxx part
 	if (Number > floor(Number) + 0.5)
 		Number = floor(Number); //ceil
 	else
-		Number = ceil(Number); //floor
+		Number = floor(Number); //floor
 
 	return Negative ? Number * (-1) : Number;
 }
@@ -86,7 +86,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 {
 	// TODO: THIS IS THE START (lens)
 	int L = chunk.size * 8 / header.wBitsPerSample;  // razmer massiva
-	//cout << L << endl;
+	//std::cout << L << std::endl;
 	double lfrm = double(L) / double(Nfrm*(1 - overlap) + overlap);
 	int Lfrm = fix(lfrm);  //myfunction
 	//printf("Lfrm %d\n",Lfrm);//++
@@ -266,6 +266,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	//f = fopen("xfrm_data.dat", "w");
 	//f = fopen("fft_data.dat", "w");
 	//f = fopen("sp_local_data.dat", "w");
+
 	for (int k = 0; k<Nfrm; k++) //Nfrm
 	{
 		//fprintf(f,"%d\n\n",k);
@@ -384,6 +385,18 @@ double* matrINvect(double** matr, int N, int M)
 		for (int j = 0; j<M; j++)
 		{
 			vec[i*M + j] = matr[i][j];
+
+			//printf("%d\t%.4f\n",i*M+j, vec[i*M+j]);
+		}
+		//printf("\n");
+	}
+	*/
+
+	for (int i = 0; i< M; i++)
+	{
+		for (int j = 0; j<N; j++)
+		{
+			vec[i*N + j] = matr[j][i];
 
 			//printf("%d\t%.4f\n",i*M+j, vec[i*M+j]);
 		}
