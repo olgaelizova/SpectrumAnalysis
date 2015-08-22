@@ -1,5 +1,5 @@
 /*
-lex_experiments_master
+lex_experiments_master (update)
 */
 
 #include "stdafx.h"
@@ -35,7 +35,8 @@ int main(void)
 {
 	FILE *f = 0;
 
-	f = fopen("pilotag_wav.wav", "rb");
+	//f = fopen("pilotag_wav.wav", "rb");
+	f = fopen("mashtab_wav.wav", "rb");
 
 	if (f == NULL)
 	{
