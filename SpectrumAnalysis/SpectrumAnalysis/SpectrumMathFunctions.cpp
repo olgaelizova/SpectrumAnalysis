@@ -84,7 +84,6 @@ double sum(double* mas, int size)
 
 double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, char* window, char* type) // function for spectral analys
 {
-
 	// TODO: THIS IS THE START (lens)
 	int L = chunk.size * 8 / header.wBitsPerSample;  // razmer massiva
 	//cout << L << endl;
@@ -390,8 +389,10 @@ double* matrINvect(double** matr, int N, int M)
 		}
 		//printf("\n");
 	}
-	*/
 
+	*/
+	
+	
 	for (int i = 0; i< M; i++)
 	{
 		for (int j = 0; j<N; j++)
@@ -402,6 +403,7 @@ double* matrINvect(double** matr, int N, int M)
 		}
 		//printf("\n");
 	}
+	
 
 	return vec;
 }

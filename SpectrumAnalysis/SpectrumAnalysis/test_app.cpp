@@ -124,7 +124,10 @@ int main(void)
 
 	double* lin_spectr;
 
-	lin_spectr = matrINvect(spectr, Nfrm, Nfrb);
+	//lin_spectr = matrINvect(spectr, Nfrm, Nfrb);
+
+	lin_spectr					= readDoubles("sp_hz_pilotag_matlab.txt");
+	double * lin_specter_own	= matrINvect(spectr, Nfrm, Nfrb);
 
 	/////////////////////////////
 	//sravnenie faila s etalonom
@@ -138,17 +141,17 @@ int main(void)
 	int lDataOutput = 0;
 
 	cout << "pilotag\n" << endl;
-	koef_of_regr_korr(lin_spectr, etalon.pilotag, 1, col_vect, len_etalona); // (lens)5 to fix
+	koef_of_regr_korr(lin_specter_own, etalon.pilotag, 1, col_vect, len_etalona); // lin_specter_own
 
 	lDataOutput++;
 
 	cout << "mashtab\n" << endl;
-	koef_of_regr_korr (lin_spectr, etalon.mashtab, 1, col_vect, len_etalona);
+	koef_of_regr_korr(lin_specter_own, etalon.mashtab, 1, col_vect, len_etalona);
 
 	lDataOutput++;
 
 	cout << "navigacia\n" << endl;
-	koef_of_regr_korr (lin_spectr, etalon.navigacia, 1, col_vect, len_etalona);
+	koef_of_regr_korr(lin_specter_own, etalon.navigacia, 1, col_vect, len_etalona);
 
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	/// vivod v fail
