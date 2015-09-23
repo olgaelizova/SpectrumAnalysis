@@ -8,10 +8,6 @@ extern etalon_			etalon;
 extern wav_header_t		header;
 extern chunk_t			chunk;
 
-
-
-
-
 double fix(double Number) // function for get num without .xxx part
 {
 	bool Negative = Number < 0 ? true : false;

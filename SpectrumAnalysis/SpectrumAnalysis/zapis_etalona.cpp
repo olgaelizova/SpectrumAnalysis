@@ -3,7 +3,7 @@
 #include <vector>
 
 #define _CRT_SECURE_NO_WARNINGS
-#define DEFAULT_ETALON_PILOTAG_SIZE	595
+#define DEFAULT_ETALON_PILOTAG_SIZE	595 + 1
 
 using namespace std;
 
@@ -13,7 +13,8 @@ double * readDoubles(char* name)
 	double * result = new double[DEFAULT_ETALON_PILOTAG_SIZE];
 
 	ifstream input(name, ios_base::in);
-	if (!input.is_open()) printf("Error input file\n");;
+
+	if (!input.is_open()) printf("Error input file\n");
 
 	while (!input.eof())
 	{
@@ -59,19 +60,26 @@ double * readDoubles(char* name)
 				decPower++;
 			}
 		}
-
 		if (value[0] == '-')
-			result[pos] *= -1;
+		{
+			result[pos] *= -1; 
+		}
 		else
+		{
 			bool stop = true;
+		}
 
 		pos++;
 
 	}
 
+	input.clear();
 	input.close();
 
+	cout << *result;
+
 	return result;
+
 }
 
 double* zapis_etalona(char name[])
