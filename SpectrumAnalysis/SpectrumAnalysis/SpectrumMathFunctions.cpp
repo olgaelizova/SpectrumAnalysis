@@ -399,7 +399,7 @@ double* matrINvect(double** matr, int N, int M)
 		//printf("\n");
 	}
 
-	*/
+	
 	
 	
 	for (int i = 0; i< M; i++)
