@@ -37,7 +37,7 @@ char** extendmas(char** mas, int newsize)
 	return buf;
 }
 
-char** folderfiles(const char* path, int &setsize)
+char** folderfiles(const char* path, int &setsize, int &filescounter)
 {
 	char **nameset = new char*[setsize];
 	int pos = 0;
@@ -86,6 +86,8 @@ char** folderfiles(const char* path, int &setsize)
 					nameset = extendmas(nameset, setsize);
 					setsize *= 2;
 				}
+
+				filescounter++;
 			}
 		}
 		cout << endl;
@@ -93,6 +95,6 @@ char** folderfiles(const char* path, int &setsize)
 		//Закрываем директорию
 		_findclose(hFile);
 	}
-
+	//cout << filescounter << endl;
 	return nameset;
 }

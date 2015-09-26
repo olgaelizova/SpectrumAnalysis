@@ -29,16 +29,19 @@ int main(void)
 	string folderpath;
 	string str;
 
-	//cout << "Input path to directory with wav files!" << endl << "Directory with wav files is: ";
-	//cin >> str;
-	str = "C:\\test\\wavfiles\\";
+	int wavfilescounter = 0;
+	int efilescounter = 0;
+
+	cout << "Input path to directory with wav files!" << endl << "Directory with wav files is: ";
+	cin >> str;
+	//str = "C:\\test\\wavfiles\\";
 	folderpath = str;
 
 	str = str + "*.*";
 	const char* path = str.c_str();
 	int setsize = 2;
 
-	char** wavfiles = folderfiles(path, setsize);
+	char** wavfiles = folderfiles(path, setsize, wavfilescounter);
 	////
 
 	/// schityvaem faily etalonov
@@ -46,15 +49,15 @@ int main(void)
 	string efolderpath;
 	string estr;
 	
-	//cout << "Input path to directory with etalon files!" << endl << "Directory with etalons is: ";
-	//cin >> estr;
-	estr = "C:\\test\\etalons\\";
+	cout << "Input path to directory with etalon files!" << endl << "Directory with etalons is: ";
+	cin >> estr;
+	//estr = "C:\\test\\etalons\\";
 	efolderpath = estr;
 
 	estr = estr + "*.*";
 	const char* epath = estr.c_str();
 
-	char** etalons = folderfiles(epath, setsize);
+	char** etalons = folderfiles(epath, setsize, efilescounter);
 	///
 
 	int n = 1; // tk pervie dva faila est . i ..
@@ -63,12 +66,12 @@ int main(void)
 
 	FILE* f = 0;
 
-	for (int i = 0+n; i < 3+n; i++) // i=0
+	for (int i = 0 + n; i < wavfilescounter; i++) // i=0
 	{
 		strpath = folderpath + wavfiles[i];
 		const char* fullpath = strpath.c_str();
 
-		cout << "Fullpath is: " << fullpath << endl;
+		//cout << "Fullpath is: " << fullpath << endl;
 		cout << "Wav-file is: " << wavfiles[i] << endl << endl; // wavfile[i]
 
 		f = fopen(fullpath, "rb"); // wavfile[i]
@@ -160,7 +163,7 @@ int main(void)
 	etalon.mashtab		= readDoubles(name2);
 	etalon.navigacia	= readDoubles(name3);
 	*/
-	for (int j = 0 + n; j < 3 + n; j++)
+	for (int j = 0 + n; j < efilescounter; j++)
 	{
 		int len = 0;
 		estrpath = efolderpath + etalons[j];

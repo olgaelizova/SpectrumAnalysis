@@ -367,7 +367,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	//////
 
 
-	FileUtils::SaveMatrixToFile("SpectrumData.txt", sp, Nfrm, Nfrb);
+	//FileUtils::SaveMatrixToFile("SpectrumData.txt", sp, Nfrm, Nfrb);
 
 	return sp;
 

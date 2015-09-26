@@ -8,4 +8,4 @@
 using namespace std;
 
 char** extendmas(char** mas, int newsize);
-char** folderfiles(const char* path, int &setsize);
+char** folderfiles(const char* path, int &setsize, int &filescounter);
