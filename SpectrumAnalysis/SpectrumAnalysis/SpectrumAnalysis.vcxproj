@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="FolderFiles.cpp" />
+    <ClCompile Include="MatlabFunctions.cpp" />
     <ClCompile Include="My_FFT.cpp" />
     <ClCompile Include="SpectrumMathFunctions.cpp" />
     <ClCompile Include="SpectrumMathSupport.cpp" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="FolderFiles.h" />
+    <ClInclude Include="MatlabFunctions.h" />
     <ClInclude Include="My_FFT.h" />
     <ClInclude Include="SpectrumMathFunctions.h" />
     <ClInclude Include="SpectrumMathSupport.h" />

@@ -1,24 +1,23 @@
 #include "stdafx.h"
-#include <memory.h>  // analog mem.h in WinVS  // <memory.h> in unix
 #include <stdio.h>
 
-#include <math.h>
-//#include "My_FFT.cpp"
-
-#define _CRT_SECURE_NO_WARNINGS
-
-using namespace std;
-
-#include "My_FFT.h"
-#include "zapis_etalona.h"
+#include <memory.h>
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <math.h>
+
+#include "My_FFT.h"
+#include "zapis_etalona.h"
 #include "FileUtils.h"
 #include "SpectrumMathFunctions.h"
 #include "FolderFiles.h"
 
-etalon_			etalon;
+using namespace std;
+
+#define _CRT_SECURE_NO_WARNINGS
+
+//etalon_			etalon;
 wav_header_t	header;
 chunk_t			chunk;
 
@@ -34,10 +33,9 @@ int main(void)
 
 	cout << "Input path to directory with wav files!" << endl << "Directory with wav files is: ";
 	cin >> str;
-	//str = "C:\\test\\wavfiles\\";
+
 	folderpath = str;
 
-	//str = str + "*.*";
 	const char* path = str.c_str();
 	char *path_ = 0;
 	FileUtils::CpyCharStr(path_, path);
@@ -56,10 +54,9 @@ int main(void)
 	
 	cout << "Input path to directory with etalon files!" << endl << "Directory with etalons is: ";
 	cin >> estr;
-	//estr = "C:\\test\\etalons\\";
+
 	efolderpath = estr;
 
-	//estr = estr + "*.*";
 	const char* epath = estr.c_str();
 	char *epath_ = 0;
 	FileUtils::CpyCharStr(epath_, epath);
@@ -90,10 +87,6 @@ int main(void)
 			system("pause");
 			return 0;
 		}
-
-		///chistim stroky s putem k faily
-		//strpath.clear();
-		///
 
 		// schitaem razmer faila
 		int fileSize = 0;

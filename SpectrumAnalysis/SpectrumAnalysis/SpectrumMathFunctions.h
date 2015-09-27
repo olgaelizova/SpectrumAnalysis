@@ -27,7 +27,7 @@ struct chunk_t  // dannye wav
 	DWORD size;
 	//Chunk data bytes
 };
-
+/*
 struct etalon_
 {
 	double* pilotag;
@@ -35,18 +35,18 @@ struct etalon_
 	double* navigacia;
 	
 };
-
-double fix(double Number); // function for get num without .xxx part
+*/
+//double fix(double Number); // function for get num without .xxx part
 
 double hz2mel(double Fo);  // perevod hz v mel
 
 double mel2hz(double Fo);  // perevod mel v hz
 
-int nextpow2(int b);  // poluchenie pokazatelya stepeni
+//int nextpow2(int b);  // poluchenie pokazatelya stepeni
 
-double* feval(int NFFT, char* window, int Lfrm);  // function for evaluation window parameters
+//double* feval(int NFFT, char* window, int Lfrm);  // function for evaluation window parameters
 
-double sum(double* mas, int size);
+//double sum(double* mas, int size);
 
 double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, char* window, char* type); // function for spectral analys
 
@@ -68,14 +68,14 @@ double* division_vec(double* vec, int len, double p); // delenie vectora na chis
 
 double* ones_vec(int len);
 
-double mean(double* vec, int len);  //++
+//double mean(double* vec, int len);  //++
 
-double std_vec(double* vec, int len);
+//double std_vec(double* vec, int len);
 
-double* pow_vec(double* vec, int len, double n);  // ne rabotaet pri pereprisvaivanii
+//double* pow_vec(double* vec, int len, double n);  // ne rabotaet pri pereprisvaivanii
 
-double* abs_vec(double* vec, int len);
+//double* abs_vec(double* vec, int len);
 
-double norm(double* v, int len, double p);
+//double norm(double* v, int len, double p);
 
 int koef_of_regr_korr(double* buffer, double* etalon, int usenoise, int col, int len);

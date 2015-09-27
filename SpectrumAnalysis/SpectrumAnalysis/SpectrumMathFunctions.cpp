@@ -6,11 +6,11 @@
 
 using namespace std;
 
-extern etalon_			etalon;
+//extern etalon_			etalon;
 extern wav_header_t		header;
 extern chunk_t			chunk;
 
-double fix(double Number) // function for get num without .xxx part
+/*double fix(double Number) // function for get num without .xxx part
 {
 	bool Negative = Number < 0 ? true : false;
 	Number = fabs(Number);
@@ -22,7 +22,7 @@ double fix(double Number) // function for get num without .xxx part
 
 	return Negative ? Number * (-1) : Number;
 }
-
+*/
 double hz2mel(double Fo)  // perevod hz v mel
 {
 	double F = 0.0;
@@ -38,7 +38,7 @@ double mel2hz(double Fo)  // perevod mel v hz
 	return F;
 }
 
-int nextpow2(int b)  // poluchenie pokazatelya stepeni
+/*int nextpow2(int b)  // poluchenie pokazatelya stepeni
 {
 	int x = ceil(log(b) / log(2));
 	return x;
@@ -79,10 +79,9 @@ double sum(double* mas, int size)
 
 	return sum;
 }
-
+*/
 double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, char* window, char* type) // function for spectral analys
 {
-	// TODO: THIS IS THE START (lens)
 	int L = chunk.size * 8 / header.wBitsPerSample;  // razmer massiva
 	//std::cout << L << std::endl;
 	double lfrm = double(L) / double(Nfrm*(1 - overlap) + overlap);
@@ -366,8 +365,7 @@ double** speval_eq(double* buffer, int Nfrm, double overlap, int Fs, int Nfrb, c
 	delete[] freq;
 	//////
 
-
-	//FileUtils::SaveMatrixToFile("SpectrumData.txt", sp, Nfrm, Nfrb);
+	FileUtils::SaveMatrixToFile("SpectrumData.txt", sp, Nfrm, Nfrb);
 
 	return sp;
 
@@ -400,9 +398,6 @@ double* matrINvect(double** matr, int N, int M)
 		}
 		//printf("\n");
 	}
-
-	
-	
 	
 	for (int i = 0; i< M; i++)
 	{
@@ -458,28 +453,6 @@ double** matrONmatr(double** matr1/*kvadr*/, double** matr2/*pryamoug*/, int N/*
 	//	std::cout << "\n\n";
 	}
 
-
-	/*
-	double** mul = new double*[N];
-
-	for (int i = 0; i<N; i++)//stroki
-	{
-		mul[i] = new double[M];
-		for (int j = 0; j<M; j++)//stolbcy
-		{
-			mul[i][j] = 0;
-			for (int t = 0; t<2; t++)
-			{
-				mul[i][j] += matr1[t][i] * matr2[j][t];
-			}
-
-			//std::cout << mul[i][j] << "\n";
-		}
-		//std::cout << "\n\n";
-	}
-
-	*/
-
 	return mul;
 }
 
@@ -488,9 +461,6 @@ double** transpONmatr(double** transp_matr, double** matr, int N, int M) // N=le
 	int size = 0, l = 0;
 	if (N <= M) size = N, l = M;
 	else size = M, l = N;
-
-	//cout << size << endl; ==2
-	//cout << l << endl; ==595
 
 	double** mul = new double*[size];
 
@@ -504,13 +474,6 @@ double** transpONmatr(double** transp_matr, double** matr, int N, int M) // N=le
 			{
 				//mul[i][j] += transp_matr[i][k] * matr[k][j]; // some strange :(
 				mul[i][j] += transp_matr[i][k] * matr[k][j];
-
-				//cout << transp_matr[i][k] << endl;
-				//if ((k % 100) == 0)
-				//	bool stop = true;
-				//cout << matr[k][j] << endl;
-				//printf("\n transp");
-				//cout << transp_matr[i][k] << endl;
 			}
 
 				//cout << mul[i][j]<<endl;
@@ -652,7 +615,7 @@ double* ones_vec(int len)
 
 	return vec;
 }
-
+/*
 double mean(double* vec, int len)  //++
 {
 	double m = 0;
@@ -723,10 +686,9 @@ double norm(double* v, int len, double p)
 	//system("pause");
 	return n;
 }
-
+*/
 int koef_of_regr_korr(double* buffer, double* etalon, int usenoise, int col, int len)
 {
-	/// to chto ponyala
 	double** X = new double*[len];  // 595 - dlina vectora kak etalona tak i spectra
 
 	double* shum;
@@ -737,7 +699,7 @@ int koef_of_regr_korr(double* buffer, double* etalon, int usenoise, int col, int
 	double norm_const = norm(constanta, len, 2.0);
 	//cout << "NormConst: " << norm_const << endl;  //++
 
-	//double std_shum = std_vec(shum,len);
+	double std_shum = std_vec(shum,len);
 	//cout << std_shum << endl; // =1?
 
 	double mean_etalon = mean(etalon, len);
@@ -758,7 +720,7 @@ int koef_of_regr_korr(double* buffer, double* etalon, int usenoise, int col, int
 
 		if (col == 3)
 		{
-			//X[i][2] = shum[i]/std_shum;	// pomexa
+			X[i][2] = shum[i]/std_shum;	// pomexa
 			//cout << X[i][2] << endl;
 		}
 	}
@@ -774,31 +736,6 @@ int koef_of_regr_korr(double* buffer, double* etalon, int usenoise, int col, int
 	koef = matrONvec(quotient, buffer, len, col);
 
 	std::cout << koef[1] << std::endl;
-	/*double** matr1 = new double*[2]; // test
-	double** matr2 = new double*[2];
-
-	for(int i=0; i<2; i++)
-	{	matr1[i] = new double[2];
-	for(int j=0; j<2; j++)
-	{
-	matr1[i][j] = rand()%100-50;
-	cout << matr1[i][j] << "\t";
-	}
-	cout << endl;
-	}
-	cout << endl;
-	for(int i=0; i<2; i++)
-	{	matr2[i] = new double[5];
-	for(int j=0; j<5; j++)
-	{
-	matr2[i][j] = rand()%100-50;
-	cout << matr2[i][j] << "\t";
-	}
-	cout << endl;
-	}
-
-	matrONmatr(matr1,matr2,5,2);
-	*/
 
 	// free() problem here
 	//delete[] koef;

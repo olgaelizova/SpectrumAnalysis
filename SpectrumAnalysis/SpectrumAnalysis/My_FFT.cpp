@@ -15,14 +15,12 @@ double* FFTAnalysis(double *AVal, double *FTvl, int Nvl, int Nft)
 	n = Nvl * 2;
 	Tmvl = new double[n];
 
-	//delete[] Tmvl;
-
 	for (i = 0; i < n; i += 2) {
 		Tmvl[i] = 0;
 		Tmvl[i + 1] = AVal[i / 2];
 	}
 
-	i = 1; j = 1; /// WAY TOO SUSpicious (lens)2
+	i = 1; j = 1; 
 	while (i < n) {
 		if (j > i) {
 			Tmpr = Tmvl[i]; 
@@ -40,7 +38,8 @@ double* FFTAnalysis(double *AVal, double *FTvl, int Nvl, int Nft)
 	}
 
 	Mmax = 2;
-	while (n > Mmax) {  // very suspicious !!!
+	while (n > Mmax) 
+	{  
 		Theta = -TwoPi / Mmax; Wpi = sin(Theta);
 		Wtmp = sin(Theta / 2); Wpr = Wtmp * Wtmp * 2;
 		Istp = Mmax * 2; Wr = 1; Wi = 0; m = 1;
@@ -72,5 +71,5 @@ double* FFTAnalysis(double *AVal, double *FTvl, int Nvl, int Nft)
 	}
 
 	return FTvl;
-	//delete []Tmvl;
+
 }

@@ -19,22 +19,6 @@ char** extendmas(char** mas, int newsize)
 
 	delete[] mas;
 
-	/*
-	mas = new char*[newsize * 2];
-
-	for (int i = 0; i < newsize; i++)
-	{
-		mas[i] = new char[260];
-		memcpy(mas[i], buf[i], 260);
-	}
-	
-	for (int i = 0; i < newsize; i++)
-	{
-		delete[] buf[i];
-	}
-	delete[] buf;
-	
-	*/
 	return buf;
 }
 
@@ -54,24 +38,6 @@ char** folderfiles(const char* path, int &setsize, int &filescounter, char* exte
 	else
 	{
 		//В цикле обходим файлы директории
-/*		do
-		{
-			if (file.name != "." && file.name != "..")
-			{
-				nameset[pos] = new char[260];
-				memcpy(nameset[pos], &file.name, 260);
-				cout << nameset[pos] << endl;
-				pos++;
-
-				if (pos == setsize )
-				{
-					nameset = extendmas(nameset, setsize);
-					setsize *= 2;
-				}
-			}
-
-		} while (_findnext(hFile, &file) == 0);
-*/
 		cout << "Files in folder " << path << " are: " << endl;
 		while (_findnext(hFile, &file) == 0)
 		{
@@ -97,6 +63,6 @@ char** folderfiles(const char* path, int &setsize, int &filescounter, char* exte
 		//Закрываем директорию
 		_findclose(hFile);
 	}
-	//cout << filescounter << endl;
+
 	return nameset;
 }
