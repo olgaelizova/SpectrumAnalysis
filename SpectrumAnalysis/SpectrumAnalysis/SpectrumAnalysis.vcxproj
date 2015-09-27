@@ -128,23 +128,30 @@
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="FolderFiles.cpp" />
     <ClCompile Include="MatlabFunctions.cpp" />
-    <ClCompile Include="My_FFT.cpp" />
-    <ClCompile Include="SpectrumMathFunctions.cpp" />
-    <ClCompile Include="SpectrumMathSupport.cpp" />
+    <ClCompile Include="MatrixTransform.cpp" />
+    <ClCompile Include="FFTAnalysis.cpp" />
+    <ClCompile Include="RegrKoefAnalysis.cpp" />
+    <ClCompile Include="SpectrumTypeTransf.cpp" />
+    <ClCompile Include="SpectrumAnalysis.cpp" />
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="test_app.cpp" />
-    <ClCompile Include="zapis_etalona.cpp" />
+    <ClCompile Include="VoiceRecognition.cpp" />
+    <ClCompile Include="VectorTransform.cpp" />
+    <ClCompile Include="ReadEtalons.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="FolderFiles.h" />
     <ClInclude Include="MatlabFunctions.h" />
-    <ClInclude Include="My_FFT.h" />
-    <ClInclude Include="SpectrumMathFunctions.h" />
-    <ClInclude Include="SpectrumMathSupport.h" />
+    <ClInclude Include="MatrixTransform.h" />
+    <ClInclude Include="FFTAnalysis.h" />
+    <ClInclude Include="RegrKoefAnalysis.h" />
+    <ClInclude Include="SpectrumTypeTransf.h" />
+    <ClInclude Include="SpectrumAnalysis.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="zapis_etalona.h" />
+    <ClInclude Include="VectorTransform.h" />
+    <ClInclude Include="ReadEtalons.h" />
+    <ClInclude Include="WavReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

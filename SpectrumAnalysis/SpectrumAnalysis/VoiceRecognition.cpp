@@ -7,17 +7,18 @@
 #include <string>
 #include <math.h>
 
-#include "My_FFT.h"
-#include "zapis_etalona.h"
-#include "FileUtils.h"
-#include "SpectrumMathFunctions.h"
+#include "FFTAnalysis.h"
+#include "ReadEtalons.h"
+#include "WavReader.h"
 #include "FolderFiles.h"
+#include "SpectrumAnalysis.h"
+#include "RegrKoefAnalysis.h"
+#include "FileUtils.h"
 
 using namespace std;
 
 #define _CRT_SECURE_NO_WARNINGS
 
-//etalon_			etalon;
 wav_header_t	header;
 chunk_t			chunk;
 
@@ -148,8 +149,6 @@ int main(void)
 	char win[] = "hann";
 	char type[] = "hz";
 
-	//int Nfrm = fix(nfrm); //my_function fix - otbros drobnoi chasti  ++
-	//printf("Nfrm %d\n",Nfrm);//++
 	/////////////////////////////// tut znachenia takie, chto bu poluchit odinakovuy matricy s etalonom
 	int Nfrb = 35;
 	int Nfrm = 17;
@@ -157,18 +156,8 @@ int main(void)
 	double **spectr;
 	spectr = speval_eq(data_chunk, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
 	////////////////////////////////////////////////////////////////////////////////////////////////
-	//zapis' etalonov iz txt faila
-	/*
-	char name1[40] = { "etalon_pilotag.txt" }; //20
-	char name2[40] = { "etalon_mashtab.txt" }; //20
-	char name3[44] = { "etalon_navigacia.txt" }; //22
-	*/
-	/*
-	//etalon.pilotag = zapis_etalona(name1);		// gives mean value -3.1386171643444776
-	etalon.pilotag		= readDoubles(name1);		// gives mean value -3.1406766853184722
-	etalon.mashtab		= readDoubles(name2);
-	etalon.navigacia	= readDoubles(name3);
-	*/
+	//chtenie etalonov iz txt faila
+
 	for (int j = 0; j < efilescounter; j++)
 	{
 		int len = 0;
@@ -188,62 +177,17 @@ int main(void)
 		//sravnenie faila s etalonom
 		int Nfrm_etalona = 17;
 		int Nfrb_etalona = 35;
-		//int len_etalona = 595;
+
 		int len_etalona = len;
-		//cout << len_etalona << endl;
+
 		int col_vect = 2; // skolko vectorov: (shum), etalon, sravn_zapis
 
-		///// neverno tak kak dolgen bit k2 max dlya etalona so slovom
-
-		/*	// dlya resultatov iz matlab
-			double alpha = 0.95;
-			double* tmp = new double[len_etalona];
-			for (int i = 0; i < len_etalona; i++)
-			{
-			if (i == 0)
-			{
-			tmp[i] = 0;
-			}
-			else
-			{
-			tmp[i] = lin_spectr[i-1] * alpha;
-			}
-			//cout << tmp[1] << endl;
-			}
-			for (int i = 0; i < len_etalona; i++)
-			{
-			if (i != 0)
-			{
-			lin_spectr[i] = lin_spectr[i] - tmp[i];
-			}
-			}
-			delete[] tmp;
-			////
-			*/
-
-/*		int lDataOutput = 0;
-		cout << "Etalon is: " << endl << endl;
-		cout << "pilotag\n" << endl;
-		koef_of_regr_korr(lin_spectr, etalon.pilotag, 1, col_vect, len_etalona); // (lens)5 to fix
-
-		lDataOutput++;
-		cout << endl;
-
-		cout << "mashtab\n" << endl;
-		koef_of_regr_korr(lin_spectr, etalon.mashtab, 1, col_vect, len_etalona);
-
-		lDataOutput++;
-		cout << endl;
-
-		cout << "navigacia\n" << endl;
-		koef_of_regr_korr(lin_spectr, etalon.navigacia, 1, col_vect, len_etalona);
-		cout << endl << endl;
-*/
 		cout << "Etalon is: " << etalons[j] << endl;
 
-		koef_of_regr_korr(lin_spectr, etalon, 1, col_vect, len_etalona); 
+		koef_of_regr(lin_spectr, etalon, 1, col_vect, len_etalona); 
 
 		cout << endl;
+
 		///chistim stroky s putem k faily
 		estrpath.clear();
 		///

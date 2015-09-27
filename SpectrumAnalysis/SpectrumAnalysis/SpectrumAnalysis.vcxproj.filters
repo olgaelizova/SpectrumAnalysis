@@ -15,25 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="zapis_etalona.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="test_app.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="My_FFT.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FileUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpectrumMathFunctions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SpectrumMathSupport.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FolderFiles.cpp">
@@ -42,33 +27,69 @@
     <ClCompile Include="MatlabFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MatrixTransform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VectorTransform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadEtalons.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpectrumAnalysis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FFTAnalysis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RegrKoefAnalysis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpectrumTypeTransf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoiceRecognition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="My_FFT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="zapis_etalona.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FileUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpectrumMathFunctions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpectrumMathSupport.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FolderFiles.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MatlabFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorTransform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadEtalons.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpectrumAnalysis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WavReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FFTAnalysis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RegrKoefAnalysis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpectrumTypeTransf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

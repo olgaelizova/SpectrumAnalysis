@@ -2,7 +2,7 @@
 // FTvl - vixodnoi massiv, Nft - razmernost vixodnogo massiva ravnyi Nvl.
 
 #include "stdafx.h"
-#include "My_FFT.h"
+#include "FFTAnalysis.h"
 
 double* FFTAnalysis(double *AVal, double *FTvl, int Nvl, int Nft)
 {

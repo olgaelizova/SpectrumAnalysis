@@ -1,4 +1,5 @@
-
+#include "stdafx.h"
+using namespace std;
 
 double fix(double Number); // function for get num without .xxx part
 
@@ -17,3 +18,7 @@ double* pow_vec(double* vec, int len, double n);  // ne rabotaet pri pereprisvai
 double* abs_vec(double* vec, int len); // absolutnoe znachenie vectora
 
 double norm(double* v, int len, double p); // norma vectora
+
+double* zeros_for_buffer(double* buffer, int num_zero, int L);  //dobavlenie nulei v konec buffera
+
+double** zeros(int m, int n);  //formirovanie dvumernogo massiva MxN iz nulei

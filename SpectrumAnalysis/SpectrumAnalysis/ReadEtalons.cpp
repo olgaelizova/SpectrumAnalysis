@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "zapis_etalona.h"
+#include "ReadEtalons.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 #define DEFAULT_ETALON_PILOTAG_SIZE	596
