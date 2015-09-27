@@ -71,13 +71,15 @@ bool FileUtils::CheckExtension(char *a, char* b, int l)
 		if (b[i] != a[pos + i])
 			return false;
 	}
+
+	return res;
 }
 
 void FileUtils::CheckFolderSlash( char* &path)
 {
 	int pos = 0;
 
-	for (;;)
+	for (;;) 
 	{
 		if (path[pos] == '\0')
 			break;
@@ -110,11 +112,27 @@ void FileUtils::AppendCharsAtEnd( char* &d, char* s, int n)
 		pos++;
 	}
 
-	char * newD = new char[pos + n];
-	memcpy(newD, d, pos);
+	char * newD = new char[pos + n + 1];
+	memcpy(newD, d, pos + 1);
 	memcpy(&newD[pos], s, n);
 
-	newD[pos + n - 1] = '\0';
+	newD[pos + n] = '\0';
 
 	d = newD;
+}
+
+void FileUtils::CpyCharStr(char * &dest, const char* src)
+{
+	int pos = 0;
+
+	for (;;)
+	{
+		if (src[pos] == '\0')
+			break;
+
+		pos++;
+	}
+
+	dest = new char[pos + 1];
+	memcpy(dest, src, pos + 1);
 }

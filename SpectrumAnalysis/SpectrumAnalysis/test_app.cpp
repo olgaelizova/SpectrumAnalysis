@@ -42,10 +42,11 @@ int main(void)
 	char *path_ = 0;
 	FileUtils::CpyCharStr(path_, path);
 	FileUtils::CheckFolderSlash(path_);
+	folderpath = path_;
 	FileUtils::AppendCharsAtEnd(path_, "*.*", 3);
 	int setsize = 2;
 
-	char** wavfiles = folderfiles(path_, setsize, wavfilescounter);
+	char** wavfiles = folderfiles(path_, setsize, wavfilescounter, "wav");
 	////
 
 	/// schityvaem faily etalonov
@@ -63,18 +64,17 @@ int main(void)
 	char *epath_ = 0;
 	FileUtils::CpyCharStr(epath_, epath);
 	FileUtils::CheckFolderSlash(epath_);
+	efolderpath = epath_;
 	FileUtils::AppendCharsAtEnd(epath_, "*.*", 3);
 
-	char** etalons = folderfiles(epath, setsize, efilescounter);
+	char** etalons = folderfiles(epath_, setsize, efilescounter, "txt");
 	///
-
-	int n = 1; // tk pervie dva faila est . i ..
 
 	cout << "Start computing... " << endl << endl;
 
 	FILE* f = 0;
 
-	for (int i = 0 + n; i < wavfilescounter; i++) // i=0
+	for (int i = 0 ; i < wavfilescounter; i++) // i=0
 	{
 		strpath = folderpath + wavfiles[i];
 		const char* fullpath = strpath.c_str();
@@ -92,7 +92,7 @@ int main(void)
 		}
 
 		///chistim stroky s putem k faily
-		strpath.clear();
+		//strpath.clear();
 		///
 
 		// schitaem razmer faila
@@ -140,6 +140,11 @@ int main(void)
 			//cout << data_chunk[i] << endl;
 		}
 	////////////////////////////////////////////////////////////////////////////////////////////////
+
+		///chistim stroky s putem k faily
+		strpath.clear();
+		///
+
 	//spectral analysis
 
 	int Fs = 22050;
@@ -171,13 +176,12 @@ int main(void)
 	etalon.mashtab		= readDoubles(name2);
 	etalon.navigacia	= readDoubles(name3);
 	*/
-	for (int j = 0 + n; j < efilescounter; j++)
+	for (int j = 0; j < efilescounter; j++)
 	{
 		int len = 0;
 		estrpath = efolderpath + etalons[j];
 
 		const char* efullpath = estrpath.c_str();
-
 
 		double* etalon = readDoubles((char*)efullpath, len);
 		//////////////////////////////

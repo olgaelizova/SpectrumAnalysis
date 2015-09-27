@@ -9,8 +9,8 @@ using namespace std;
 double * readDoubles(char* name, int &len)
 {
 	////
-	//int default_size = row_count(name)+1;
-	int default_size = DEFAULT_ETALON_PILOTAG_SIZE;
+	int default_size = row_count(name)+1;
+	//int default_size = DEFAULT_ETALON_PILOTAG_SIZE;
 	//cout << "Row count is: " << row_count(name) << endl;
 	////
 
@@ -168,8 +168,10 @@ double* zapis_etalona(char name[])
 	return massiv;
 }
 
-int row_count(const char* filename) // tolko dlya failov s yavnym perexodom na druguy stroku
+int row_count(const char* filename) 
 {
+/*	
+// tolko dlya failov s yavnym perexodom na druguy stroku
 	FILE* fp;
 	int cnt = 0;
 
@@ -180,10 +182,31 @@ int row_count(const char* filename) // tolko dlya failov s yavnym perexodom na d
 	{
 		fscanf(fp, "%*[^\n]%*c");
 		cnt++;
-		cout << cnt << endl;
+		//cout << cnt << endl;
 	}
 
 	fclose(fp);
 	//cout << cnt << endl;
 	return cnt;
+*/
+
+// dlya lubyx failov
+	int len = 0;
+
+	ifstream input(filename, ios_base::in);
+
+	if (!input.is_open()) printf("Error input file\n");
+
+	while (!input.eof())
+	{
+		string value;
+		input >> value;
+
+		len++;
+	}
+
+	input.clear();
+	input.close();
+
+	return len;
 }

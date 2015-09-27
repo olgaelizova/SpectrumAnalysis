@@ -38,7 +38,7 @@ char** extendmas(char** mas, int newsize)
 	return buf;
 }
 
-char** folderfiles(const char* path, int &setsize, int &filescounter)
+char** folderfiles(const char* path, int &setsize, int &filescounter, char* extension)
 {
 	char **nameset = new char*[setsize];
 	int pos = 0;
@@ -76,7 +76,7 @@ char** folderfiles(const char* path, int &setsize, int &filescounter)
 		while (_findnext(hFile, &file) == 0)
 		{
 			//if ((file.name != ".") || (file.name != ".."))
-			if (FileUtils::CheckExtension(file.name, "wav", 3))
+			if (FileUtils::CheckExtension(file.name, extension, 3))
 			{
 				nameset[pos] = new char[260];
 				memcpy(nameset[pos], &file.name, 260);
