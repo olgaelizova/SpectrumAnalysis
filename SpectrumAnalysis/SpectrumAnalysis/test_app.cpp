@@ -37,11 +37,15 @@ int main(void)
 	//str = "C:\\test\\wavfiles\\";
 	folderpath = str;
 
-	str = str + "*.*";
+	//str = str + "*.*";
 	const char* path = str.c_str();
+	char *path_ = 0;
+	FileUtils::CpyCharStr(path_, path);
+	FileUtils::CheckFolderSlash(path_);
+	FileUtils::AppendCharsAtEnd(path_, "*.*", 3);
 	int setsize = 2;
 
-	char** wavfiles = folderfiles(path, setsize, wavfilescounter);
+	char** wavfiles = folderfiles(path_, setsize, wavfilescounter);
 	////
 
 	/// schityvaem faily etalonov
@@ -54,8 +58,12 @@ int main(void)
 	//estr = "C:\\test\\etalons\\";
 	efolderpath = estr;
 
-	estr = estr + "*.*";
+	//estr = estr + "*.*";
 	const char* epath = estr.c_str();
+	char *epath_ = 0;
+	FileUtils::CpyCharStr(epath_, epath);
+	FileUtils::CheckFolderSlash(epath_);
+	FileUtils::AppendCharsAtEnd(epath_, "*.*", 3);
 
 	char** etalons = folderfiles(epath, setsize, efilescounter);
 	///
@@ -167,7 +175,10 @@ int main(void)
 	{
 		int len = 0;
 		estrpath = efolderpath + etalons[j];
+
 		const char* efullpath = estrpath.c_str();
+
+
 		double* etalon = readDoubles((char*)efullpath, len);
 		//////////////////////////////
 		//vityagivanie matrici spectralnogo analiza v vector

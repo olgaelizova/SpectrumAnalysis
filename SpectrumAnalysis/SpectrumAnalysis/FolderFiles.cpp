@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "FolderFiles.h"
+#include "FileUtils.h"
 
 char** extendmas(char** mas, int newsize)
 {
@@ -74,7 +75,8 @@ char** folderfiles(const char* path, int &setsize, int &filescounter)
 		cout << "Files in folder " << path << " are: " << endl;
 		while (_findnext(hFile, &file) == 0)
 		{
-			if ((file.name != ".") || (file.name != ".."))
+			//if ((file.name != ".") || (file.name != ".."))
+			if (FileUtils::CheckExtension(file.name, "wav", 3))
 			{
 				nameset[pos] = new char[260];
 				memcpy(nameset[pos], &file.name, 260);
