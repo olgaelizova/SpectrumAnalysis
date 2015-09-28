@@ -137,6 +137,7 @@
     <ClCompile Include="VoiceRecognition.cpp" />
     <ClCompile Include="VectorTransform.cpp" />
     <ClCompile Include="ReadEtalons.cpp" />
+    <ClCompile Include="WavReader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileUtils.h" />

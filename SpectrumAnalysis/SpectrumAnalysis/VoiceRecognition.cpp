@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include <stdio.h>
 
-#include <memory.h>
+//#include <memory.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -18,9 +18,6 @@
 using namespace std;
 
 #define _CRT_SECURE_NO_WARNINGS
-
-wav_header_t	header;
-chunk_t			chunk;
 
 int main(void)
 {
@@ -70,7 +67,8 @@ int main(void)
 
 	cout << "Start computing... " << endl << endl;
 
-	FILE* f = 0;
+	//FILE* f = 0;
+	int samples_count = 0;
 
 	for (int i = 0 ; i < wavfilescounter; i++) // i=0
 	{
@@ -80,59 +78,9 @@ int main(void)
 		//cout << "Fullpath is: " << fullpath << endl;
 		cout << "Wav-file is: " << wavfiles[i] << endl << endl; // wavfile[i]
 
-		f = fopen(fullpath, "rb"); // wavfile[i]
+		double* wavdata;
 
-		if (f == NULL)
-		{
-			printf("File no open\n");
-			system("pause");
-			return 0;
-		}
-
-		// schitaem razmer faila
-		int fileSize = 0;
-		fseek(f, 0, SEEK_END);  // smeshaet kursor ot 0 do konza faila
-		fileSize = ftell(f);	// vozvrash. tekushyu poziciu v potoke
-		fseek(f, 0, SEEK_SET); // vozvrashaem ukazatel na nachalo faila
-		//
-		fread(&header, sizeof(header), 1, f); // chitaem inf v structuru header
-
-		//// proverca na format PCM
-		if (header.wFormatTag != 1)
-			printf("Not PCM format\n");
-		fseek(f, header.fLen - 16, SEEK_CUR); //skip wExtraFormatBytes & extra format bytes
-		while (true) //go to data chunk //tut propuskaem polya LIST i INFO
-		{
-			fread(&chunk, sizeof(chunk), 1, f);
-			if (*(DWORD *)&chunk.id == 0x61746164) break;
-			fseek(f, chunk.size, SEEK_CUR); //skip chunk data bytes
-		}
-
-		// schitaem chislo samplov 
-		int sample_size = header.wBitsPerSample / 8;
-		int samples_count = chunk.size * 8 / header.wBitsPerSample;
-
-		// pamyat pod massiv znacheniy iz data 
-		DWORD *value = new DWORD[samples_count];
-		memset(value, 0, sizeof(DWORD)* samples_count);  // dlya nee nygna memory.h
-
-		for (int i = 0; i < samples_count; i++)
-		{
-			fread(&value[i], sample_size, 1, f);  // poluchili massiv
-		}
-
-		fclose(f);
-
-		// poluchim massiv (double) nashix znachenyi
-		double* data_chunk = new double[samples_count];
-
-		for (int i = 0; i < samples_count; i++)
-		{
-			//for 16 bits per sample only: delim na 0x8000 chto ravno 32768.0;
-			double x = (double)(INT16)value[i] / 32768.0;
-			data_chunk[i] = x;
-			//cout << data_chunk[i] << endl;
-		}
+		wavdata = wavread(fullpath, samples_count);
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
 		///chistim stroky s putem k faily
@@ -154,7 +102,7 @@ int main(void)
 	int Nfrm = 17;
 	//////////////////////////////
 	double **spectr;
-	spectr = speval_eq(data_chunk, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
+	spectr = speval_eq(wavdata, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	//chtenie etalonov iz txt faila
 
@@ -201,8 +149,7 @@ int main(void)
 	cout << endl;
 	///////
 	delete[] spectr;  // ochistka pamyaty
-	delete[] data_chunk;  // ochistka pamyaty
-	delete[]value;  // ochistka pamyaty
+	delete[] wavdata;  // ochistka pamyaty
 	//////
 	}
 

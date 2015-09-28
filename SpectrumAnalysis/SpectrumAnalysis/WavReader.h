@@ -1,4 +1,7 @@
 #include "stdafx.h"
+#include <memory.h>
+#include <iostream>
+#include <fstream>
 
 #pragma once
 
@@ -29,3 +32,5 @@ struct chunk_t  // dannye wav
 	DWORD size;
 	//Chunk data bytes
 };
+
+double* wavread(const char* fullpath, int &samples_count);
