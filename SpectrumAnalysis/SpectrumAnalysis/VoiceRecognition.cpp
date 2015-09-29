@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include <stdio.h>
 
-//#include <memory.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -64,11 +63,27 @@ int main(void)
 
 	char** etalons = folderfiles(epath_, setsize, efilescounter, "txt");
 	///
+	int samples_count = 0;
+	int Fs = 22050;   // default - ==header.nSamplesPerSec
+	double overlap = 0.0;
+	double NFFT = 512.0;
+	//double nfrm = samples_count / (NFFT*(1 - overlap)); // chunk.samples_count iz-za WavRead
+	char win[] = "hann";  // okno hanna, vtoroi variant s oknom hamminga
+	char type[] = "hz";
+
+	/////////////////////////////// tut znachenia takie, chto bu poluchit odinakovuy matricy s etalonom
+	int Nfrb = 35;
+	int Nfrm = 17;
+
+	////////
+	int len = 0;
+	int len_etalona = 0;
+	int Nfrm_etalona = 17;
+	int Nfrb_etalona = 35;
+	int col_vect = 2; // skolko vectorov: (shum), etalon, sravn_zapis
+	//////
 
 	cout << "Start computing... " << endl << endl;
-
-	//FILE* f = 0;
-	int samples_count = 0;
 
 	for (int i = 0 ; i < wavfilescounter; i++) // i=0
 	{
@@ -81,26 +96,13 @@ int main(void)
 		double* wavdata;
 
 		wavdata = wavread(fullpath, samples_count);
-	////////////////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////
 
 		///chistim stroky s putem k faily
 		strpath.clear();
 		///
 
 	//spectral analysis
-
-	int Fs = 22050;
-	double overlap = 0.0;
-	double NFFT = 512.0;
-	double nfrm = samples_count / (NFFT*(1 - overlap)); // chunk.samples_count iz-za WavRead
-	//int Nfrb = 30;
-	char win[] = "hann";
-	char type[] = "hz";
-
-	/////////////////////////////// tut znachenia takie, chto bu poluchit odinakovuy matricy s etalonom
-	int Nfrb = 35;
-	int Nfrm = 17;
-	//////////////////////////////
 	double **spectr;
 	spectr = speval_eq(wavdata, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
 	////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,7 +110,6 @@ int main(void)
 
 	for (int j = 0; j < efilescounter; j++)
 	{
-		int len = 0;
 		estrpath = efolderpath + etalons[j];
 
 		const char* efullpath = estrpath.c_str();
@@ -121,14 +122,8 @@ int main(void)
 
 		lin_spectr = matrINvect(spectr, Nfrm, Nfrb);
 
-		/////////////////////////////
-		//sravnenie faila s etalonom
-		int Nfrm_etalona = 17;
-		int Nfrb_etalona = 35;
-
-		int len_etalona = len;
-
-		int col_vect = 2; // skolko vectorov: (shum), etalon, sravn_zapis
+		//sravnenie faila s etalonami
+		len_etalona = len;
 
 		cout << "Etalon is: " << etalons[j] << endl;
 
