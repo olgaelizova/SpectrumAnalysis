@@ -1,7 +1,10 @@
 #include "stdafx.h"
+#include <stdio.h>
 #include <memory.h>
 #include <iostream>
 #include <fstream>
+
+using namespace std;
 
 #pragma once
 
@@ -17,11 +20,11 @@ struct wav_header_t  // wav header
 	char fId[4]; //"fmt " = 0x20746D66
 	DWORD fLen; //16 [+ sizeof(wExtraFormatBytes) + wExtraFormatBytes]
 	WORD wFormatTag;
-	WORD nChannels;
-	DWORD nSamplesPerSec;
+	WORD nChannels; // kolvo kanalov, 1-mono, 2-stereo
+	DWORD nSamplesPerSec;  // frequency - default 22050
 	DWORD nAvgBytesPerSec;
-	WORD nBlockAlign;
-	WORD wBitsPerSample;
+	WORD nBlockAlign;	// bait na sempl
+	WORD wBitsPerSample;  // tochnost zvuch. 8bit, 16bit...
 	//[WORD wExtraFormatBytes;]
 	//[Extra format bytes]
 };
@@ -29,8 +32,7 @@ struct wav_header_t  // wav header
 struct chunk_t  // dannye wav
 {
 	char id[4]; //"data" = 0x61746164
-	DWORD size;
-	//Chunk data bytes
+	DWORD size; //Chunk data bytes
 };
 
-double* wavread(const char* fullpath, int &samples_count);
+double* wavread(const char* fullpath,int &samples_count); 
