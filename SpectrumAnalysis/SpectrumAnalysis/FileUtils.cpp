@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "FileUtils.h"
 
-
 FileUtils::FileUtils()
 {
 }
-
 
 FileUtils::~FileUtils()
 {
@@ -41,13 +39,9 @@ void FileUtils::SaveMatrixToFile(char* f, double** m, int w, int h)
 
 				out.str("");
 			}
-
 			out << "\r\n";
-
 		}
-
-		fclose(file);
-		
+		fclose(file);	
 	}
 }
 

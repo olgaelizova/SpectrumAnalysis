@@ -6,7 +6,6 @@ double* substraction_vec(double* vec, int len, double s) // vichitanie chisla iz
 	for (int i = 0; i<len; i++)
 	{
 		vec[i] = vec[i] - s;
-		//cout << vec[i]<< endl;
 	}
 
 	return vec;
@@ -26,7 +25,6 @@ double* ones_vec(int len)
 	for (int i = 0; i<len; i++)
 	{
 		vec[i] = 1;
-		//cout << vec[i] << endl;  //++
 	}
 
 	return vec;

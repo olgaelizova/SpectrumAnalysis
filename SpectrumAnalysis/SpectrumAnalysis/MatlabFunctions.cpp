@@ -31,7 +31,6 @@ double* feval(int NFFT, char* window, int Lfrm)  // function for evaluation wind
 		{
 			win[i] = 0.5*(1 - (cos(2 * pi*i / (Lfrm - 1))));
 		}
-
 	}
 
 	if (strcmp(window, "hamming") == 0)
@@ -90,9 +89,7 @@ double* pow_vec(double* vec, int len, double n)  // ne rabotaet pri pereprisvaiv
 	for (int i = 0; i<len; i++)
 	{
 		v[i] = pow(vec[i], n);
-		//printf(" %.4f ",v[i]); //++
 	}
-	//cout << endl << endl;
 	return v;
 }
 
@@ -102,9 +99,8 @@ double* abs_vec(double* vec, int len)
 	{
 		if (vec[i] < 0)
 			vec[i] = vec[i] * (-1.0);
-		//cout << vec[i] << endl; //++
 	}
-	//cout << endl << endl;
+
 	return vec;
 }
 
@@ -119,10 +115,9 @@ double norm(double* v, int len, double p)
 
 double* zeros_for_buffer(double* buffer, int num_zero, int L)  //dobavlenie nulei v konec buffera
 {
-	double* buf = new double[L + num_zero]; //
+	double* buf = new double[L + num_zero];
 
-	//for (int i = 0; i<L; i++) // end of array has been violated!
-	for (int i = 0; i<L + num_zero; i++) // end of array has been violated!
+	for (int i = 0; i<L + num_zero; i++)
 	{
 		buf[i] = buffer[i];
 	}

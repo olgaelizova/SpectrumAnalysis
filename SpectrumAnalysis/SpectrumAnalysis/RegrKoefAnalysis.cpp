@@ -13,7 +13,6 @@ int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 	double norm_const = norm(constanta, len, 2.0);
 
 	double std_shum = std_vec(shum, len);
-	//cout << std_shum << endl; // =1?
 
 	double mean_etalon = mean(etalon, len);
 
@@ -31,7 +30,6 @@ int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 		if (col == 3)
 		{
 			X[i][2] = shum[i] / std_shum;	// pomexa
-			//cout << X[i][2] << endl;
 		}
 	}
 
@@ -45,7 +43,6 @@ int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 
 	koef = matrONvec(quotient, buffer, len, col);
 
-	//cout << koef[1] << endl;
 	printf("koef: %.4f", koef[1]);
 
 	// free() problem here

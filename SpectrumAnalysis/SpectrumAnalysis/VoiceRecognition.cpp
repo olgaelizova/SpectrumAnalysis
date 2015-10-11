@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include <stdio.h>
 
-//#include <memory.h>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -43,7 +42,6 @@ int main(void)
 	int setsize = 2;
 
 	char** wavfiles = folderfiles(path_, setsize, wavfilescounter, "wav");
-	////
 
 	/// schityvaem faily etalonov
 	string estrpath;
@@ -68,7 +66,6 @@ int main(void)
 	int Fs = 22050;   // default - ==header.nSamplesPerSec
 	double overlap = 0.0;
 	double NFFT = 512.0;
-	//double nfrm = samples_count / (NFFT*(1 - overlap)); // chunk.samples_count iz-za WavRead
 	char win[] = "hann";  // okno hanna, vtoroi variant s oknom hamminga
 	char type[] = "hz";
 
@@ -91,13 +88,11 @@ int main(void)
 		strpath = folderpath + wavfiles[i];
 		const char* fullpath = strpath.c_str();
 
-		//cout << "Fullpath is: " << fullpath << endl;
 		cout << "Wav-file is: " << wavfiles[i] << endl << endl; // wavfile[i]
 
 		double* wavdata;
 
 		wavdata = wavread(fullpath, samples_count);
-	//////////////////////////////////////////////////////
 
 		///chistim stroky s putem k faily
 		strpath.clear();
@@ -106,9 +101,8 @@ int main(void)
 	//spectral analysis
 	double **spectr;
 	spectr = speval_eq(wavdata, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
-	////////////////////////////////////////////////////////////////////////////////////////////////
-	//chtenie etalonov iz txt faila
 
+	//chtenie etalonov iz txt faila
 	for (int j = 0; j < efilescounter; j++)
 	{
 		estrpath = efolderpath + etalons[j];
@@ -116,8 +110,8 @@ int main(void)
 		const char* efullpath = estrpath.c_str();
 
 		double* etalon = readDoubles((char*)efullpath, len);
-		//////////////////////////////
-		//vityagivanie matrici spectralnogo analiza v vector
+
+		//////vityagivanie matrici spectralnogo analiza v vector
 
 		double* lin_spectr;
 
@@ -141,17 +135,14 @@ int main(void)
 		delete[] lin_spectr;
 		///
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////
 	cout << endl;
-	///////
-	delete[] spectr;  // ochistka pamyaty
-	delete[] wavdata;  // ochistka pamyaty
-	//////
+
+	/////// ochistka pamyaty
+	delete[] spectr;  
+	delete[] wavdata;  
 	}
 
 	system("pause");
-
-	/*_CrtDumpMemoryLeaks();*/
 
 	return 0;
 }

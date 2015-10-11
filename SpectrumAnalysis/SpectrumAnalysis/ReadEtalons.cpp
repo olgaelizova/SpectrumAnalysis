@@ -8,14 +8,11 @@ using namespace std;
 
 double * readDoubles(char* name, int &len)
 {
-	////
 	int default_size = row_count(name)+1;
-	//int default_size = DEFAULT_ETALON_PILOTAG_SIZE;
-	//cout << "Row count is: " << row_count(name) << endl;
 	////
 
 	int pos = 0;
-	//double * result = new double[DEFAULT_ETALON_PILOTAG_SIZE];
+
 	double * result = new double[default_size];
 
 	ifstream input(name, ios_base::in);
@@ -70,11 +67,6 @@ double * readDoubles(char* name, int &len)
 		{
 			result[pos] *= -1; 
 		}
-/*		else
-		{
-			bool stop = true;
-		}
-*/
 		pos++;
 		len++;
 	}
@@ -117,33 +109,23 @@ double* zapis_etalona(char name[])
 					char s = value[k];
 					drobnya[i][k - 3] = int(s - '0');
 					z += double(drobnya[i][k - 3]) / pow(10, k - 2);
-					//printf("%d", drobnya[i][k-3]);
-					//printf("%.16f\t", z/pow(10,k-2));
 				}
 			}
 
 			char znackstr = value[0];
-			//cout << j <<"\t" << z << endl;
+
 			if (znackstr == '-')
 				znack[j] = 1;
 			else
 				znack[j] = 0;
 			j++;
 
-
-			//printf("%.16f", z);
 			drob[l] = z;
-			//printf("%.16f", drob[l]);
-			//printf("\n");
 			cel[l] = atof(value.c_str());
-			//printf("%f\n", cel[l]);
 		}
 		l++;
 	}
 	input.close();
-
-	//for(int i=0; i<595; i++)
-	//cout << znack[i] << endl;
 
 	double* massiv = new double[595];
 	for (int i = 0; i<595; i++)
@@ -156,7 +138,6 @@ double* zapis_etalona(char name[])
 		{
 			massiv[i] = cel[i] + drob[i];
 		}
-		//printf("%d\t%.14f\n", i,massiv[i]);
 	}
 
 	delete[] znack;
@@ -168,29 +149,8 @@ double* zapis_etalona(char name[])
 	return massiv;
 }
 
-int row_count(const char* filename) 
+int row_count(const char* filename)  // ne zavisit ot zapisi strok v faile
 {
-/*	
-// tolko dlya failov s yavnym perexodom na druguy stroku
-	FILE* fp;
-	int cnt = 0;
-
-	if ((fp = fopen(filename, "r")) == NULL)
-		return 0;
-
-	while (!feof(fp) && !ferror(fp)) 
-	{
-		fscanf(fp, "%*[^\n]%*c");
-		cnt++;
-		//cout << cnt << endl;
-	}
-
-	fclose(fp);
-	//cout << cnt << endl;
-	return cnt;
-*/
-
-// dlya lubyx failov
 	int len = 0;
 
 	ifstream input(filename, ios_base::in);

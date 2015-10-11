@@ -10,10 +10,7 @@ double* matrINvect(double** matr, int N, int M)
 		for (int j = 0; j<N; j++)
 		{
 			vec[i*N + j] = matr[j][i];
-
-			//printf("%d\t%.4f\n",i*M+j, vec[i*M+j]);
 		}
-		//printf("\n");
 	}
 
 	for (int i = 0; i< M; i++)
@@ -21,12 +18,8 @@ double* matrINvect(double** matr, int N, int M)
 		for (int j = 0; j<N; j++)
 		{
 			vec[i*N + j] = matr[j][i];
-
-			//printf("%d\t%.4f\n",i*M+j, vec[i*M+j]);
 		}
-		//printf("\n");
 	}
-
 
 	return vec;
 }
@@ -42,7 +35,6 @@ double** transp_matr(double** matr, int N, int M)  // N=len, M=col
 		for (int j = 0; j<N; j++)
 		{
 			t_matr[i][j] = matr[j][i];
-			//cout << matr[j][i] << endl;
 		}
 	}
 
@@ -64,10 +56,7 @@ double** matrONmatr(double** matr1/*kvadr*/, double** matr2/*pryamoug*/, int N/*
 			{
 				mul[i][j] += matr1[i][t] * matr2[t][j];
 			}
-
-			//std::cout << mul[i][j] << "\n";
 		}
-		//	std::cout << "\n\n";
 	}
 
 	return mul;
@@ -91,8 +80,6 @@ double** transpONmatr(double** transp_matr, double** matr, int N, int M) // N=le
 			{
 				mul[i][j] += transp_matr[i][k] * matr[k][j];
 			}
-
-			//cout << mul[i][j]<<endl;
 		}
 	}
 
@@ -124,7 +111,6 @@ double* matrONvec(double** matr, double* vec, int N, int M)
 		{
 			mul[i] += matr[i][j] * vec[j];
 		}
-		//cout << mul[i] << endl;
 	}
 
 	return mul;
@@ -188,7 +174,6 @@ double** obr_matr(double **A, int N)
 		for (int j = 0; j < N; j++)
 		{
 			A[i][j] = E[i][j];
-			//cout << A[i][j] <<endl;
 		}
 
 	for (int i = 0; i < N; i++)

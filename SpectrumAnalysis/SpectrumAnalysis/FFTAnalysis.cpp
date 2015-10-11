@@ -71,5 +71,4 @@ double* FFTAnalysis(double *AVal, double *FTvl, int Nvl, int Nft)
 	}
 
 	return FTvl;
-
 }

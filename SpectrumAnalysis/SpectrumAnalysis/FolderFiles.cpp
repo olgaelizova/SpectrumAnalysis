@@ -22,7 +22,7 @@ char** extendmas(char** mas, int newsize)
 	return buf;
 }
 
-char** folderfiles(const char* path, int &setsize, int &filescounter, char* extension)
+char** folderfiles(const char* path, int &setsize, int &filescounter, char* extension) // tolko dlya WINDOWS!
 {
 	char **nameset = new char*[setsize];
 	int pos = 0;
