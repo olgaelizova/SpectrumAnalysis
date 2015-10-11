@@ -45,13 +45,12 @@ int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 
 	printf("koef: %.4f", koef[1]);
 
-	// free() problem here
-	//delete[] koef;
-	//delete[] quotient;
-	//delete[] proizv;
+	delete[] koef; 
+	delete[] quotient; 
+	delete[] proizv;  
 	delete[] shum;
 	delete[] constanta;
-	//delete[] subst;
+	delete[] subst; 
 
 	for (int i = 0; i<len; i++)
 		delete[] X[i];

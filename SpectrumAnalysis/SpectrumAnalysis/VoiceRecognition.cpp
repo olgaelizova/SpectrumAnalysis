@@ -28,9 +28,9 @@ int main(void)
 	int wavfilescounter = 0;
 	int efilescounter = 0;
 
-	cout << "Input path to directory with wav files!" << endl << "Directory with wav files is: ";
-	cin >> str;
-
+	//cout << "Input path to directory with wav files!" << endl << "Directory with wav files is: ";
+	//cin >> str;
+	str = "C:\\test\\wavfiles\\";
 	folderpath = str;
 
 	const char* path = str.c_str();
@@ -48,9 +48,9 @@ int main(void)
 	string efolderpath;
 	string estr;
 	
-	cout << "Input path to directory with etalon files!" << endl << "Directory with etalons is: ";
-	cin >> estr;
-
+	//cout << "Input path to directory with etalon files!" << endl << "Directory with etalons is: ";
+	//cin >> estr;
+	estr = "C:\\test\\etalons\\";
 	efolderpath = estr;
 
 	const char* epath = estr.c_str();
@@ -61,7 +61,8 @@ int main(void)
 	FileUtils::AppendCharsAtEnd(epath_, "*.*", 3);
 
 	char** etalons = folderfiles(epath_, setsize, efilescounter, "txt");
-	///
+
+	/// default values for spectrum analysis
 	int samples_count = 0;
 	int Fs = 22050;   // default - ==header.nSamplesPerSec
 	double overlap = 0.0;
@@ -69,7 +70,7 @@ int main(void)
 	char win[] = "hann";  // okno hanna, vtoroi variant s oknom hamminga
 	char type[] = "hz";
 
-	/////////////////////////////// tut znachenia takie, chto bu poluchit odinakovuy matricy s etalonom
+	//// tut znachenia takie, chto bu poluchit odinakovuy matricy s etalonom
 	int Nfrb = 35;
 	int Nfrm = 17;
 
@@ -112,7 +113,6 @@ int main(void)
 		double* etalon = readDoubles((char*)efullpath, len);
 
 		//////vityagivanie matrici spectralnogo analiza v vector
-
 		double* lin_spectr;
 
 		lin_spectr = matrINvect(spectr, Nfrm, Nfrb);

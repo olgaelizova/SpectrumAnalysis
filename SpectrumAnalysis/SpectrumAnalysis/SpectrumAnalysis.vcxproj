@@ -137,6 +137,7 @@
     <ClCompile Include="VoiceRecognition.cpp" />
     <ClCompile Include="VectorTransform.cpp" />
     <ClCompile Include="ReadEtalons.cpp" />
+    <ClCompile Include="VoiceWrite.cpp" />
     <ClCompile Include="WavReader.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +153,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="VectorTransform.h" />
     <ClInclude Include="ReadEtalons.h" />
+    <ClInclude Include="VoiceWrite.h" />
     <ClInclude Include="WavReader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
