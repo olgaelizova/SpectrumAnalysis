@@ -8,6 +8,7 @@ using namespace std;
 
 double * readDoubles(char* name, int &len)
 {
+	len = 0;
 	int default_size = row_count(name)+1;
 	////
 
@@ -65,10 +66,12 @@ double * readDoubles(char* name, int &len)
 		}
 		if (value[0] == '-')
 		{
-			result[pos] *= -1; 
+			result[pos] *= -1;
 		}
+
 		pos++;
 		len++;
+		
 	}
 
 	input.clear();

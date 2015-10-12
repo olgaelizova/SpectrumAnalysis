@@ -1,14 +1,13 @@
 #include "stdafx.h"
 #include "VectorTransform.h"
 
-double* substraction_vec(double* vec, int len, double s) // vichitanie chisla iz vectora
+void substraction_vec(double* vec, int len, double s) // vichitanie chisla iz vectora
 {
 	for (int i = 0; i<len; i++)
 	{
 		vec[i] = vec[i] - s;
 	}
 
-	return vec;
 }
 
 double* division_vec(double* vec, int len, double p) // delenie vectora na chislo

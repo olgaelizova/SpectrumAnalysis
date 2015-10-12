@@ -106,6 +106,7 @@ int main(void)
 	//chtenie etalonov iz txt faila
 	for (int j = 0; j < efilescounter; j++)
 	{
+
 		estrpath = efolderpath + etalons[j];
 
 		const char* efullpath = estrpath.c_str();
@@ -123,7 +124,7 @@ int main(void)
 		cout << "Etalon is: " << etalons[j] << endl;
 
 		koef_of_regr(lin_spectr, etalon, 1, col_vect, len_etalona); 
-
+		
 		cout << endl;
 
 		///chistim stroky s putem k faily

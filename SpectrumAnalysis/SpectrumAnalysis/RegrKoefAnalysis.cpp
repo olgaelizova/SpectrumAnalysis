@@ -16,8 +16,8 @@ int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 
 	double mean_etalon = mean(etalon, len);
 
-	double* subst = substraction_vec(etalon, len, mean_etalon); //etalon[i]-mean_etalon
-	double std_subst = std_vec(subst, len);
+	substraction_vec(etalon, len, mean_etalon); //etalon[i]-mean_etalon
+	double std_subst = std_vec(etalon, len);
 
 	for (int i = 0; i<len; i++)
 	{
@@ -25,7 +25,7 @@ int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 
 		X[i][0] = constanta[i] / norm_const; //normirovannye t.k. v matlab norm(x)=norm(x,2)
 
-		X[i][1] = subst[i] / std_subst;	// etalon
+		X[i][1] = etalon[i] / std_subst;	// etalon
 
 		if (col == 3)
 		{
@@ -50,7 +50,6 @@ int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 	delete[] proizv;  
 	delete[] shum;
 	delete[] constanta;
-	delete[] subst; 
 
 	for (int i = 0; i<len; i++)
 		delete[] X[i];
