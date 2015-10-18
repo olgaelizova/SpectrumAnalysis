@@ -127,6 +127,7 @@
   <ItemGroup>
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="FolderFiles.cpp" />
+    <ClCompile Include="InputParameters.cpp" />
     <ClCompile Include="MatlabFunctions.cpp" />
     <ClCompile Include="MatrixTransform.cpp" />
     <ClCompile Include="FFTAnalysis.cpp" />
@@ -143,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="FolderFiles.h" />
+    <ClInclude Include="InputParameters.h" />
     <ClInclude Include="MatlabFunctions.h" />
     <ClInclude Include="MatrixTransform.h" />
     <ClInclude Include="FFTAnalysis.h" />

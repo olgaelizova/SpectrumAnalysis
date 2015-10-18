@@ -1,18 +1,14 @@
 #include "stdafx.h"
 #include <stdio.h>
 
-#include <iostream>
-#include <fstream>
-#include <string>
 #include <math.h>
 
 #include "FFTAnalysis.h"
 #include "ReadEtalons.h"
-#include "WavReader.h"
-#include "FolderFiles.h"
 #include "SpectrumAnalysis.h"
 #include "RegrKoefAnalysis.h"
-#include "FileUtils.h"
+
+#include "InputParameters.h"
 
 using namespace std;
 
@@ -20,67 +16,49 @@ using namespace std;
 
 int main(void)
 {
-	//// schityvaem wav faily
-	string strpath;
-	string folderpath;
-	string str;
-
-	int wavfilescounter = 0;
-	int efilescounter = 0;
-
-	//cout << "Input path to directory with wav files!" << endl << "Directory with wav files is: ";
-	//cin >> str;
-	str = "C:\\test\\wavfiles\\";
-	folderpath = str;
-
-	const char* path = str.c_str();
-	char *path_ = 0;
-	FileUtils::CpyCharStr(path_, path);
-	FileUtils::CheckFolderSlash(path_);
-	folderpath = path_;
-	FileUtils::AppendCharsAtEnd(path_, "*.*", 3);
-	int setsize = 2;
-
-	char** wavfiles = folderfiles(path_, setsize, wavfilescounter, "wav");
-
-	/// schityvaem faily etalonov
-	string estrpath;
-	string efolderpath;
-	string estr;
-	
-	//cout << "Input path to directory with etalon files!" << endl << "Directory with etalons is: ";
-	//cin >> estr;
-	estr = "C:\\test\\etalons\\";
-	efolderpath = estr;
-
-	const char* epath = estr.c_str();
-	char *epath_ = 0;
-	FileUtils::CpyCharStr(epath_, epath);
-	FileUtils::CheckFolderSlash(epath_);
-	efolderpath = epath_;
-	FileUtils::AppendCharsAtEnd(epath_, "*.*", 3);
-
-	char** etalons = folderfiles(epath_, setsize, efilescounter, "txt");
-
-	/// default values for spectrum analysis
+	//// default values for spectrum analysis
 	int samples_count = 0;
 	int Fs = 22050;   // default - ==header.nSamplesPerSec
 	double overlap = 0.0;
 	double NFFT = 512.0;
 	char win[] = "hann";  // okno hanna, vtoroi variant s oknom hamminga
 	char type[] = "hz";
+	////
 
 	//// tut znachenia takie, chto bu poluchit odinakovuy matricy s etalonom
 	int Nfrb = 35;
 	int Nfrm = 17;
+	////
 
-	////////
+	//// tut parametry dlya etalonov i evaluate koef of regression
 	int len = 0;
 	int len_etalona = 0;
 	int Nfrm_etalona = 17;
 	int Nfrb_etalona = 35;
 	int col_vect = 2; // skolko vectorov: (shum), etalon, sravn_zapis
-	//////
+	////
+
+	//// for input files functions
+	int setsize = 2;
+
+	int wavfilescounter = 0;
+	int efilescounter = 0;
+
+	string strpath;
+	string folderpath;
+	string str;
+
+	string estrpath;
+	string efolderpath;
+	string estr;
+	////
+
+	char** wavfiles = 0;
+	char** etalons = 0;
+
+	wavfiles = inputWavFile(setsize, wavfilescounter, strpath, folderpath, str);
+
+	etalons = inputEtalons(setsize, efilescounter, estrpath, efolderpath, estr);
 
 	cout << "Start computing... " << endl << endl;
 
