@@ -101,5 +101,8 @@
     <ClInclude Include="VoiceWrite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InputParameters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

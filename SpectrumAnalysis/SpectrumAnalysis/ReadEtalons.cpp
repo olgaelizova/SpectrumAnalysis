@@ -8,8 +8,9 @@ using namespace std;
 
 double * readDoubles(char* name, int &len)
 {
+	len = 0;
+
 	int default_size = row_count(name)+1;
-	////
 
 	int pos = 0;
 
