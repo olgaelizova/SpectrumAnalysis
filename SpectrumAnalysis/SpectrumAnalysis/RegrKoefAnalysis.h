@@ -5,4 +5,4 @@
 
 using namespace std;
 
-int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len);
+double koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len);

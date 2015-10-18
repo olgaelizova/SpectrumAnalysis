@@ -10,6 +10,8 @@
 
 #include "InputParameters.h"
 
+#include "FindingMaxKoef.h"
+
 using namespace std;
 
 #define _CRT_SECURE_NO_WARNINGS
@@ -67,7 +69,7 @@ int main(void)
 		strpath = folderpath + wavfiles[i];
 		const char* fullpath = strpath.c_str();
 
-		cout << "Wav-file is: " << wavfiles[i] << endl << endl; // wavfile[i]
+		cout << "Wav-file is: " << wavfiles[i] << endl << endl;
 
 		double* wavdata;
 
@@ -81,10 +83,11 @@ int main(void)
 	double **spectr;
 	spectr = speval_eq(wavdata, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
 
+	double* koeffs = new double[efilescounter];
+
 	//chtenie etalonov iz txt faila
 	for (int j = 0; j < efilescounter; j++)
 	{
-
 		estrpath = efolderpath + etalons[j];
 
 		const char* efullpath = estrpath.c_str();
@@ -99,11 +102,11 @@ int main(void)
 		//sravnenie faila s etalonami
 		len_etalona = len;
 
-		cout << "Etalon is: " << etalons[j] << endl;
+		//cout << "Etalon is: " << etalons[j] << endl;
 
-		koef_of_regr(lin_spectr, etalon, 1, col_vect, len_etalona); 
+		koeffs[j] = koef_of_regr(lin_spectr, etalon, 1, col_vect, len_etalona); 
 		
-		cout << endl;
+		//cout << koeffs[j];
 
 		///chistim stroky s putem k faily
 		estrpath.clear();
@@ -114,11 +117,14 @@ int main(void)
 		delete[] lin_spectr;
 		///
 	}
+
+	maxKoef(etalons, koeffs, efilescounter);
 	cout << endl;
 
 	/////// ochistka pamyaty
 	delete[] spectr;  
-	delete[] wavdata;  
+	delete[] wavdata;
+	delete[] koeffs;
 	}
 
 	system("pause");

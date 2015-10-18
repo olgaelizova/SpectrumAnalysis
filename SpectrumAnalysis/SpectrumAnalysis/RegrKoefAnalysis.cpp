@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "RegrKoefAnalysis.h"
 
-int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
+double koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 {
 	double** X = new double*[len];
 
@@ -43,7 +43,8 @@ int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 
 	koef = matrONvec(quotient, buffer, len, col);
 
-	printf("koef: %.4f", koef[1]);
+	//printf("koef: %.4f", koef[1]);
+	double retkoef = koef[1];
 
 	delete[] koef; 
 	delete[] quotient; 
@@ -55,5 +56,5 @@ int koef_of_regr(double* buffer, double* etalon, int usenoise, int col, int len)
 		delete[] X[i];
 	delete[] X;
 
-	return 0;
+	return retkoef;
 }
