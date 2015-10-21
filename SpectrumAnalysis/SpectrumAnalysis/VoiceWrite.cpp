@@ -2,14 +2,18 @@
 
 #include "VoiceWrite.h"
 
+#ifdef _WIN32
+
 using namespace std;
 
 const int NUMPTS = 22050 * 2 * 5;   // 5 seconds
 int sampleRate = 22050;
 short int waveIn[NUMPTS];
 
-void VoiceWrite()
+double* VoiceWrite()
 {
+	cout << "VoiceWrite function" << endl;
+	/*
 	WAVEFORMATEX pFormat;
 	pFormat.wFormatTag = WAVE_FORMAT_PCM;     // simple, uncompressed format
 	pFormat.nChannels = 2;                    //  1=mono, 2=stereo
@@ -63,4 +67,18 @@ void VoiceWrite()
 	waveOutClose(hWaveOut);
 
 	system("pause");
+	*/
+	return 0;
 }
+
+#else
+#ifdef __unix__
+//TODO realization for UNIX
+double* VoiceWrite()
+{
+
+}
+#else
+#error Unsupported Implementation
+#endif
+#endif

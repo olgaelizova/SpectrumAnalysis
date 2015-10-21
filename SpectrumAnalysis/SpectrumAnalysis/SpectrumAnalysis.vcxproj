@@ -132,6 +132,7 @@
     <ClCompile Include="MatlabFunctions.cpp" />
     <ClCompile Include="MatrixTransform.cpp" />
     <ClCompile Include="FFTAnalysis.cpp" />
+    <ClCompile Include="PushButtonHandler.cpp" />
     <ClCompile Include="RegrKoefAnalysis.cpp" />
     <ClCompile Include="SpectrumTypeTransf.cpp" />
     <ClCompile Include="SpectrumAnalysis.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="MatlabFunctions.h" />
     <ClInclude Include="MatrixTransform.h" />
     <ClInclude Include="FFTAnalysis.h" />
+    <ClInclude Include="PushButtonHandler.h" />
     <ClInclude Include="RegrKoefAnalysis.h" />
     <ClInclude Include="SpectrumTypeTransf.h" />
     <ClInclude Include="SpectrumAnalysis.h" />

@@ -12,12 +12,20 @@
 
 #include "FindingMaxKoef.h"
 
+#include "PushButtonHandler.h"
+
+#include "VoiceWrite.h"s
+
 using namespace std;
 
 #define _CRT_SECURE_NO_WARNINGS
 
 int main(void)
 {
+	///// flag for button handler 
+	int flag = 0;
+	/////
+
 	//// default values for spectrum analysis
 	int samples_count = 0;
 	int Fs = 22050;   // default - ==header.nSamplesPerSec
@@ -58,76 +66,139 @@ int main(void)
 	char** wavfiles = 0;
 	char** etalons = 0;
 
-	wavfiles = inputWavFile(setsize, wavfilescounter, strpath, folderpath, str);
-
 	etalons = inputEtalons(setsize, efilescounter, estrpath, efolderpath, estr);
 
-	cout << "Start computing... " << endl << endl;
+	cout << endl;
+	cout << "Press Enter for voice recording or Space for choise folder with wav files" << endl;
 
-	for (int i = 0 ; i < wavfilescounter; i++) // i=0
+	pushButtonHandler(flag);
+
+	if (flag == 13)  // Enter button
 	{
-		strpath = folderpath + wavfiles[i];
-		const char* fullpath = strpath.c_str();
-
-		cout << "Wav-file is: " << wavfiles[i] << endl << endl;
-
 		double* wavdata;
 
-		wavdata = wavread(fullpath, samples_count);
+		wavdata = VoiceWrite();
 
-		///chistim stroky s putem k faily
-		strpath.clear();
-		///
+		cout << "Start computing... " << endl << endl;
 
-	//spectral analysis
-	double **spectr;
-	spectr = speval_eq(wavdata, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
+		cout << "Wav-file is: voice record " << endl << endl;
 
-	double* koeffs = new double[efilescounter];
+		double **spectr;
+		spectr = speval_eq(wavdata, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
 
-	//chtenie etalonov iz txt faila
-	for (int j = 0; j < efilescounter; j++)
+		double* koeffs = new double[efilescounter];
+
+		//chtenie etalonov iz txt faila
+		for (int j = 0; j < efilescounter; j++)
+		{
+			estrpath = efolderpath + etalons[j];
+
+			const char* efullpath = estrpath.c_str();
+
+			double* etalon = readDoubles((char*)efullpath, len);
+
+			//////vityagivanie matrici spectralnogo analiza v vector
+			double* lin_spectr;
+
+			lin_spectr = matrINvect(spectr, Nfrm, Nfrb);
+
+			//sravnenie faila s etalonami
+			len_etalona = len;
+
+			koeffs[j] = koef_of_regr(lin_spectr, etalon, 1, col_vect, len_etalona);
+
+			///chistim stroky s putem k faily
+			estrpath.clear();
+			///
+
+			/// ochistka pamyaty
+			delete[] etalon;
+			delete[] lin_spectr;
+			///
+		}
+
+		maxKoef(etalons, koeffs, efilescounter);
+		cout << endl;
+
+		/////// ochistka pamyaty
+		delete[] spectr;
+		delete[] wavdata;
+		delete[] koeffs;
+
+		flag = 0;
+
+		system("pause");
+	}
+
+	if (flag == 32)  // Space button
 	{
-		estrpath = efolderpath + etalons[j];
+		wavfiles = inputWavFile(setsize, wavfilescounter, strpath, folderpath, str);
 
-		const char* efullpath = estrpath.c_str();
+		cout << "Start computing... " << endl << endl;
 
-		double* etalon = readDoubles((char*)efullpath, len);
+		for (int i = 0; i < wavfilescounter; i++) // i=0
+		{
+			strpath = folderpath + wavfiles[i];
+			const char* fullpath = strpath.c_str();
 
-		//////vityagivanie matrici spectralnogo analiza v vector
-		double* lin_spectr;
+			cout << "Wav-file is: " << wavfiles[i] << endl << endl;
 
-		lin_spectr = matrINvect(spectr, Nfrm, Nfrb);
+			double* wavdata;
 
-		//sravnenie faila s etalonami
-		len_etalona = len;
+			wavdata = wavread(fullpath, samples_count);
 
-		//cout << "Etalon is: " << etalons[j] << endl;
+			///chistim stroky s putem k faily
+			strpath.clear();
+			///
 
-		koeffs[j] = koef_of_regr(lin_spectr, etalon, 1, col_vect, len_etalona); 
-		
-		//cout << koeffs[j];
+			//spectral analysis
+			double **spectr;
+			spectr = speval_eq(wavdata, Nfrm, overlap, Fs, Nfrb, win, type);  //my_function speval_eq s oknom hanna v hz
 
-		///chistim stroky s putem k faily
-		estrpath.clear();
-		///
+			double* koeffs = new double[efilescounter];
 
-		/// ochistka pamyaty
-		delete[] etalon;
-		delete[] lin_spectr;
-		///
+			//chtenie etalonov iz txt faila
+			for (int j = 0; j < efilescounter; j++)
+			{
+				estrpath = efolderpath + etalons[j];
+
+				const char* efullpath = estrpath.c_str();
+
+				double* etalon = readDoubles((char*)efullpath, len);
+
+				//////vityagivanie matrici spectralnogo analiza v vector
+				double* lin_spectr;
+
+				lin_spectr = matrINvect(spectr, Nfrm, Nfrb);
+
+				//sravnenie faila s etalonami
+				len_etalona = len;
+
+				koeffs[j] = koef_of_regr(lin_spectr, etalon, 1, col_vect, len_etalona);
+
+				///chistim stroky s putem k faily
+				estrpath.clear();
+				///
+
+				/// ochistka pamyaty
+				delete[] etalon;
+				delete[] lin_spectr;
+				///
+			}
+
+			maxKoef(etalons, koeffs, efilescounter);
+			cout << endl;
+
+			/////// ochistka pamyaty
+			delete[] spectr;
+			delete[] wavdata;
+			delete[] koeffs;
+		}
+
+		flag = 0;
+
+		system("pause");
 	}
-
-	maxKoef(etalons, koeffs, efilescounter);
-	cout << endl;
-
-	/////// ochistka pamyaty
-	delete[] spectr;  
-	delete[] wavdata;
-	delete[] koeffs;
-	}
-
-	system("pause");
 
 	return 0;
 }
